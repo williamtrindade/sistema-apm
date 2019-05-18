@@ -27,8 +27,8 @@
     <div id="app">
         <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
-                <a class="navbar-item" href="/" style="width:40px;height:50px;padding:0;float:left">
-                    <img src="{{asset('img/logo.jpg')}}" alt="Logotipo" width="100%" height="100%" >
+                <a class="navbar-item" href="https://bulma.io">
+                    <img src="{{asset('img/logo.jpg')}}">
                 </a>
                 <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                     <span aria-hidden="true"></span>
