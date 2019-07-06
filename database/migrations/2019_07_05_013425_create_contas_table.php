@@ -15,6 +15,7 @@ class CreateContasTable extends Migration
     {
         Schema::create('contas', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('arquivo');
             $table->timestamps();
         });
     }

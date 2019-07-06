@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Validator;
+use App\Aviso;
 
 class AvisoController extends Controller
 {
@@ -13,7 +16,7 @@ class AvisoController extends Controller
      */
     public function index()
     {
-        //
+        return view('avisos.index')->with('avisos', Aviso::orderBy('created_at')->paginate(8));
     }
 
     /**
@@ -23,7 +26,7 @@ class AvisoController extends Controller
      */
     public function create()
     {
-        //
+        return view('avisos.create');
     }
 
     /**
@@ -33,19 +36,13 @@ class AvisoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    {   
+        $request->validate([
+            'titulo' => 'required',
+            'conteudo' => 'required'
+        ]);
+        Aviso::create($request->all());
+        return redirect()->action('AvisoController@index')->with('status-success', 'Aviso criado!');
     }
 
     /**
@@ -56,7 +53,7 @@ class AvisoController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('avisos.edit')->with('aviso', Aviso::find($id));
     }
 
     /**
@@ -68,7 +65,12 @@ class AvisoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'titulo' => 'required',
+            'conteudo' => 'required'
+        ]);
+        Aviso::find($id)->update($request->all());
+        return redirect()->action('AvisoController@index')->with('status-success', 'Aviso Editado!');
     }
 
     /**
@@ -77,8 +79,9 @@ class AvisoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Aviso $aviso)
     {
-        //
+        $aviso->delete();
+        return redirect()->action('AvisoController@index');
     }
 }

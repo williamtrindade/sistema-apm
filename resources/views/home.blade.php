@@ -30,7 +30,7 @@
         <div class="column is-6-desktop">
             <div class="box">
                 <h1 class="title is-6">
-                        Avisos
+                    Avisos
                 </h1>    
             </div>
         </div>

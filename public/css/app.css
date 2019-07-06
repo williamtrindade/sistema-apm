@@ -12172,3 +12172,12 @@ label.panel-block:hover {
   margin: 1%;
 }
 
+.box-gd {
+  background-image: -webkit-gradient(linear, left bottom, right top, from(#ffffff), color-stop(#b9c7d5), color-stop(#6497a2), color-stop(#15675b), to(#003608));
+  background-image: linear-gradient(to right top, #ffffff, #b9c7d5, #6497a2, #15675b, #003608);
+}
+
+html {
+  height: 100%;
+}
+

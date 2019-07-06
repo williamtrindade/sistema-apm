@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="box-gd">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,7 +20,7 @@
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="container">
                 <div class="navbar-brand">
-                    <a class="navbar-item" href="{{ route('home.index') }}">
+                    <a class="navbar-item" href="{{ route('admin.index') }}">
                         APM - SM
                     </a>
                     <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -38,24 +38,24 @@
                            
                     </div>
                     <div class="navbar-end">
-                        <a class="navbar-item" href="{{ route('home.index') }}">
-                            Home
+                        <a class="navbar-item" href="{{ route('admin.index') }}">
+                            Dashboard
                         </a>
-                        <a class="navbar-item" href="{{ route('home.avisos') }}" >
+                        <a class="navbar-item" href="{{ route('avisos.index') }}" >
                             Avisos
                         </a>
-                        <a class="navbar-item" href="{{ route('home.contas') }}">
+                        <a class="navbar-item" href="{{ route('contas.index') }}">
                             Prestação de contas
                         </a>
-                        <a class="navbar-item" href="{{ route('home.imagens') }}">
-                            Imagens
+                        <a class="navbar-item" href="{{ route('imagens.index') }}">
+                            Galeria
                         </a>
                         @guest
                         
                         @else
                         <div class="navbar-item">
                             <div class="buttons">
-                                <a href="{{ route('admin.index') }}" class="navbar-item button is-primary">Área Administrativa</a>
+                                <a href="{{ route('home.index') }}" class="navbar-item button is-primary">Voltar ao Site</a>
                             </div>
                         </div>
                     
@@ -82,17 +82,12 @@
         </div>
         
         <main>
-            @yield('content')   
-        </main>
-        <footer class="footer">
-            <div class="content has-text-centered">
-              <p>
-                <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
-                <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
-                is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
-              </p>
+            <div class="container" style="margin-top:3%">
+                @include('includes.notification')
+                @yield('content')   
             </div>
-          </footer>
+          
+        </main>
     </div>
 </body>
 <!-- Scripts -->
