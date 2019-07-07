@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Date;
+use App\Conta;
+use Storage;
+use Carbon\Carbon;
 
 class ContaController extends Controller
 {
@@ -13,7 +18,7 @@ class ContaController extends Controller
      */
     public function index()
     {
-        //
+        return view('contas.index')->with('contas', Conta::orderBy('created_at', 'DESC')->paginate(8));
     }
 
     /**
@@ -23,7 +28,7 @@ class ContaController extends Controller
      */
     public function create()
     {
-        //
+        return view('contas.create');
     }
 
     /**
@@ -34,7 +39,15 @@ class ContaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fileUploaded = $request->arquivo;
+        $fileExtension = $fileUploaded->extension();
+        $fileName = Carbon::now().'.'.$fileExtension;
+        if($request->arquivo->storeAs('contas', $fileName)) {
+            Conta::create(['arquivo' => $fileName]);
+            return redirect()->back()->with('status-success', 'Arquivo enviado :)!');
+        } else {
+            return redirect()->back()->with('status-danger', 'Erro ao Salvar Arquivo :[!');
+        }
     }
 
     /**

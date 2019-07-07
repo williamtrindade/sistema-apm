@@ -12173,11 +12173,15 @@ label.panel-block:hover {
 }
 
 .box-gd {
-  background-image: -webkit-gradient(linear, left bottom, right top, from(#ffffff), color-stop(#b9c7d5), color-stop(#6497a2), color-stop(#15675b), to(#003608));
-  background-image: linear-gradient(to right top, #ffffff, #b9c7d5, #6497a2, #15675b, #003608);
+  background-image: -webkit-gradient(linear, right top, left bottom, from(#00d1b2), color-stop(#00bca0), color-stop(#00a78e), color-stop(#00927c), to(#007e6b));
+  background-image: linear-gradient(to left bottom, #00d1b2, #00bca0, #00a78e, #00927c, #007e6b);
 }
 
 html {
   height: 100%;
+}
+
+.m-nav {
+  box-shadow: 2px -4px 8px 4px #0000004f;
 }
 

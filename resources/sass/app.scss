@@ -3,9 +3,11 @@
     margin:1%;
 }
 .box-gd {
-    background-image: linear-gradient(to right top, #ffffff, #b9c7d5, #6497a2, #15675b, #003608);
-    
-}
+    background-image: linear-gradient(to left bottom, #00d1b2, #00bca0, #00a78e, #00927c, #007e6b);}
+
 html {
     height: 100%;
+}
+.m-nav {
+    box-shadow: 2px -4px 8px 4px #0000004f;
 }
