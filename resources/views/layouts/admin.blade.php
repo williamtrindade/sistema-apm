@@ -82,7 +82,7 @@
         </div>
         
         <main>
-            <div class="container" style="margin-top:3%">
+            <div>
                 @include('includes.notification')
                 @yield('content')   
             </div>

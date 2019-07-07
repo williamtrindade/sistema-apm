@@ -12173,8 +12173,7 @@ label.panel-block:hover {
 }
 
 .box-gd {
-  background-image: -webkit-gradient(linear, right top, left bottom, from(#00d1b2), color-stop(#00bca0), color-stop(#00a78e), color-stop(#00927c), to(#007e6b));
-  background-image: linear-gradient(to left bottom, #00d1b2, #00bca0, #00a78e, #00927c, #007e6b);
+  background-color: #dbdbdb4f;
 }
 
 html {

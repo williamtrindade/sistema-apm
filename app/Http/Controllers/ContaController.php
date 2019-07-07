@@ -90,8 +90,10 @@ class ContaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Conta $conta)
     {
-        //
+        Storage::disk('public')->delete('contas/'.$conta->arquivo);
+        $conta->delete();
+        return redirect()->back()->with('status-success', 'Arquivo deletado!');
     }
 }
