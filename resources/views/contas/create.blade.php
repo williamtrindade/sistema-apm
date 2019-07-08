@@ -13,7 +13,7 @@
                             <label class="label">Arquivo</label>
                             <div class="control">
                                 <input type="file" name="arquivo" id="arquivo">
-                                @error('conteudo')
+                                @error('arquivo')
                                     <p class="help is-danger">{{$message}}</p>
                                 @enderror
                             </div>

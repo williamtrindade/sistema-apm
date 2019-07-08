@@ -39,6 +39,9 @@ class ContaController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'arquivo' => 'mimes:pdf|max:2048'
+        ]);
         $fileUploaded = $request->arquivo;
         $fileExtension = $fileUploaded->extension();
         $fileName = Carbon::now().'.'.$fileExtension;

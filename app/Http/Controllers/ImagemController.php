@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Imagem;
+use Storage;
 
 class ImagemController extends Controller
 {
@@ -14,7 +15,7 @@ class ImagemController extends Controller
      */
     public function index()
     {
-        return view('galeria.index')->with('imagens', Imagem::all());
+        return view('galeria.index')->with('imagens', Imagem::paginate(10));
     }
 
     /**
@@ -35,7 +36,21 @@ class ImagemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'imagem' => 'required',
+            'imagem.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+        $imagensUploades = $request->imagem;
+        foreach($imagensUploades as $image) {
+            $fileExtension = $image->extension();
+            $fileName = $image->getClientOriginalName().$fileExtension;
+            if($image->storeAs('imagens', $fileName)) {
+                Imagem::Create(['imagem' => $fileName]);
+            } else {
+                return redirect()->back()->with('status-danger', 'Erro ao Salvar imagems :[!');
+            }
+        }
+        return redirect()->back()->with('status-success', 'Imagens enviadas :)!');        
     }
 
     /**
@@ -80,6 +95,9 @@ class ImagemController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $imagem = Imagem::find($id);
+        Storage::disk('public')->delete('imagens/'.$imagem->imagem);
+        $imagem->delete();
+        return redirect()->back()->with('status-success', 'Imagem deletada!');
     }
 }

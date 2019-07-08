@@ -6,13 +6,11 @@
             <div class="column is-12-desktop is-12-mobile">
                 
                 <h1 class="title is-4 ">Prestação de Contas</h1>
-                <a href="{{ route('contas.create') }}" class="button is-primary" style="margin-bottom:2%;">Inserir Prestação de Contas</a>
+                <a href="{{ route('contas.create') }}" class="button is-primary" style="margin-bottom:2%;">Cadastrar Prestação de Contas</a>
              
                 <div class="box">
-                    @if($contas->count() < 1)
-                        <h1 class = "title is-6"> Sem lançamentos! <h1>
-                    @else
-                        <div class="control has-icons-left has-icons-right">
+                    @if($contas->count() > 0)
+                    <div class="control has-icons-left has-icons-right">
                             <input class="input" type="email" placeholder="Buscar ano">
                             <span class="icon is-small is-left">
                                 <i class="fas fa-search"></i>
@@ -42,8 +40,13 @@
                                 @endforeach
                             </tbody>
                         </table>  
+                        {{ $contas->links() }}
+                    @else
+                        <div class="box">
+                            <h1 class="title is-6">Sem Prestação de contas!</h1>
+                        </div>
                     @endif                 
-                    {{ $contas->links() }}
+                  
                 </div>
             </div>
         </div>
