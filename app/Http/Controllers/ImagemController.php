@@ -15,7 +15,7 @@ class ImagemController extends Controller
      */
     public function index()
     {
-        return view('galeria.index')->with('imagens', Imagem::paginate(10));
+        return view('galeria.index')->with('imagens', Imagem::paginate(12));
     }
 
     /**
