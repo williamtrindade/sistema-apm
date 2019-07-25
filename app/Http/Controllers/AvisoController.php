@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Validator;
 use App\Aviso;
+use Storage;
+use Carbon\Carbon;
 
 class AvisoController extends Controller
 {
@@ -16,7 +18,7 @@ class AvisoController extends Controller
      */
     public function index()
     {
-        return view('avisos.index')->with('avisos', Aviso::orderBy('created_at')->paginate(8));
+        return view('avisos.index')->with('avisos', Aviso::orderBy('created_at', 'DESC')->paginate(8));
     }
 
     /**
@@ -38,10 +40,25 @@ class AvisoController extends Controller
     public function store(Request $request)
     {   
         $request->validate([
-            'titulo' => 'required',
-            'conteudo' => 'required'
+            'titulo' => 'required|max:255',
+            'pdf' => 'mimes:pdf|max:2048',
         ]);
-        Aviso::create($request->all());
+        if($request->hasFile('pdf')) {
+            $fileUploaded = $request->pdf;
+            $fileExtension = $fileUploaded->extension();
+            $fileName = Carbon::now().'.'.$fileExtension;
+            if($request->pdf->storeAs('avisos', $fileName)) {
+                Aviso::create([
+                    'titulo' => $request->titulo, 
+                    'conteudo' => $request->conteudo, 
+                    'pdf' => $fileName,
+                ]);
+            } else {
+                return redirect()->back()->with('status-danger', 'Erro ao Salvar Arquivo :[!');
+            }
+        } else {
+            Aviso::create($request->all());
+        }
         return redirect()->action('AvisoController@index')->with('status-success', 'Aviso criado!');
     }
 
@@ -79,9 +96,16 @@ class AvisoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Aviso $aviso)
+    public function destroy($id)
     {
-        $aviso->delete();
-        return redirect()->action('AvisoController@index');
+        $aviso = Aviso::find($id);
+        if($aviso->pdf) {
+            Storage::disk('public')->delete('avisos/'.$aviso->pdf);
+            $aviso->delete();
+            return redirect()->back()->with('status-success', 'Arquivo do Aviso deletado!');
+        } else {
+            $aviso->delete();
+            return redirect()->back()->with('status-success', 'Aviso deletado!');
+        }        
     }
 }

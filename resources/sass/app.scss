@@ -1,13 +1,26 @@
-@import './node_modules/bulma/bulma.sass';
-.margin {
-    margin:1%;
+@import './node_modules/bootstrap/scss/bootstrap.scss';
+
+#banner div div h1{
+    color: #fff;
 }
-.box-gd {
-    background-color: #dbdbdb4f;
+h1, h2, h3, h4, h5, h6, p, a {
+    font-family: 'Roboto Condensed', sans-serif;
+
 }
-html {
-    height: 100%;
+#banner div div {
+    background-color: rgba(0, 0, 0, 0.5);
 }
-.m-nav {
-    box-shadow: 2px -4px 8px 4px #0000004f;
+#banner {
+    text-align: center;
+    background-attachment: fixed;
+    background-position: bottom;
+    background-image: url('/img/banner.jpg');
+    background-size: cover;
+}
+.paralax {
+    height: 500px;
+    width:100%;
+    background-image: url('/img/bannersm.jpg');
+    background-size: cover;
+    background-attachment: fixed;
 }

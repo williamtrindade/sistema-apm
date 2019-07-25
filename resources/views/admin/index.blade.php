@@ -1,51 +1,48 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
-    <div class="columns">
-        <div class="column is-12-desktop is-12-mobile">
-            <h1 class="title is-4">Dashboard</h1>
-            <div class="box">
-                <h1 class="title is-4">Estatísticas</h1>
-                <div class="columns">
-                    <div class="column is-4-desktop">
-                        <div class="box">
-                            <h1>Avisos</h1>
-                            <h1 class="title is-1">{{ $avisos }}</h1>
-                        </div>
+    <div class="container">
+        <h1>DashBoard</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card shadow">
+                    <div class="card-header">
+                        Prestação de Contas
                     </div>
-                    <div class="column is-4-desktop">
-                        <div class="box">
-                            <h1>Prestação de Contas</h1>
-                            <h1 class="title is-1">{{ $contas }} 
-                                <span class="subtitle is-5">
-                                    @if($contas > 1)
-                                        Prestações
-                                    @else 
-                                        Prestação
-                                    @endif
-                                </span>
-                            </h1>
-                            
-                        </div>
+                    <div class="card-body">
+                        <h1>{{ $contas }}</h1>
+                        <p class="card-text">Cadastrada(s).</p>
+                        <a href="{{ route('contas.index') }}" class="btn btn-primary">Acesse</a>
                     </div>
-                    <div class="column is-4-desktop">
-                        <div class="box">
-                            <h1>Galeria</h1>
-                            <h1 class="title is-1">{{ $imagens }}
-                                <span class="subtitle is-5">
-                                    @if($imagens > 1)
-                                        Imagens
-                                    @else 
-                                        Imagem
-                                    @endif
-                                </span>
-                            </h1>
-                        </div>
+                  </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow">
+                    <div class="card-header">
+                        Imagens
                     </div>
-                </div>
+                    <div class="card-body">
+                        <h1>{{ $imagens }}</h1>
+                        <p class="card-text">Cadastrada(s).</p>
+                        <a href="{{ route('imagens.index') }}" class="btn btn-primary">Acesse</a>
+                    </div>
+                  </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow">
+                    <div class="card-header">
+                        Avisos
+                    </div>
+                    <div class="card-body">
+                        <h1>{{ $avisos }}</h1>
+                        <p class="card-text">Cadastrada(s).</p>
+                        <a href="{{ route('avisos.index') }}" class="btn btn-primary">Acesse</a>
+                    </div>
+                  </div>
             </div>
         </div>
     </div>
-</div>
+
 @endsection

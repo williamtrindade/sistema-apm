@@ -16,7 +16,8 @@ class CreateAvisosTable extends Migration
         Schema::create('avisos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('titulo');
-            $table->string('conteudo');
+            $table->longText('conteudo')->nullable();
+            $table->string('pdf')->nullable();
             $table->timestamps();
         });
     }

@@ -2,21 +2,18 @@
 
 @section('content')
 <div class="container">
-        <div class="columns">
-            <div class="column is-12-desktop is-12-mobile">
+        <div class="row">
+            <div class="col-md-12">
                 
-                <h1 class="title is-4">Avisos</h1>
-                <a href="{{ route('avisos.create') }}" class="button is-primary" style="margin-bottom:2%;">Cadastrar Aviso</a>
+                <h1>Avisos</h1>
+                <a href="{{ route('avisos.create') }}" class="btn btn-primary" style="margin-bottom:2%;">Cadastrar Aviso</a>
              
-                <div class="box">
+                <div>
                     @if(count($avisos) > 0)
-                    <div class="control has-icons-left has-icons-right">
-                        <input class="input" type="email" placeholder="Busca">
-                        <span class="icon is-small is-left">
-                            <i class="fas fa-search"></i>
-                        </span>
-                    </div>
-                    <table class="table is-fullwidth">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="busca" placeholder="Pesquise Avisos">
+                        </div>
+                        <table class="table is-fullwidth">
                             <thead>
                                 <tr>
                                     <th>Título</th>
@@ -26,23 +23,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
                                 @foreach ($avisos as $aviso)
                                     <tr>
                                         <td>{{ $aviso->titulo }}</td>
-                                        <td>{{ $aviso->conteudo }}</td>
+                                        <td>...</td>
                                         <td>{{ $aviso->created_at }}</td>
                                         <td>
-                                            <form method="POST" action="{{ route('avisos.destroy', $aviso) }}">
-                                                <a href="{{ route('avisos.edit', $aviso->id) }}" class="button is-primary"><i class="fas fa-edit"></i></a>
+                                            <form method="POST" action="{{ route('avisos.destroy', $aviso->id) }}">
+                                                <a href="{{ route('avisos.edit', $aviso->id) }}" class="btn btn-primary"><i class="fas fa-edit"></i> Editar</a>
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="button is-danger"><i class="fas fa-trash"></i></button>
+                                                <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Excluir</button>
                                             </form>  
                                         </td>
                                     </tr>
                                 @endforeach
-    
                             </tbody>
                         </table>
                         {{$avisos->links()}}

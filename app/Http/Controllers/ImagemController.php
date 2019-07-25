@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Imagem;
+use App\ImagemCategoria;
 use Storage;
+use Carbon\Carbon;
 
 class ImagemController extends Controller
 {
@@ -15,7 +17,9 @@ class ImagemController extends Controller
      */
     public function index()
     {
-        return view('galeria.index')->with('imagens', Imagem::paginate(12));
+        $categorias = ImagemCategoria::all();
+        $imagens = Imagem::paginate(12);
+        return view('galeria.index', compact('imagens', 'categorias'));
     }
 
     /**
@@ -37,20 +41,33 @@ class ImagemController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'categoria' => 'required|min:3|max:200',
             'imagem' => 'required',
             'imagem.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
+        $categoriaBanco = ImagemCategoria::where('nome', $request->categoria)->first();
+        $categoria = NULL;
+        if($categoriaBanco) {
+            $categoria = $categoriaBanco;
+        } else {
+            ImagemCategoria::create(['nome' => $request->categoria]);
+            $categoria = ImagemCategoria::where('nome', $request->categoria)->first();
+        }
+        // Salva Imagens
         $imagensUploades = $request->imagem;
         foreach($imagensUploades as $image) {
             $fileExtension = $image->extension();
-            $fileName = $image->getClientOriginalName().$fileExtension;
+            $fileName = $image->getClientOriginalName().Carbon::now().$fileExtension;
             if($image->storeAs('imagens', $fileName)) {
-                Imagem::Create(['imagem' => $fileName]);
+                Imagem::Create([
+                    'imagem' => $fileName, 
+                    'category_id' => $categoria->id
+                ]);
             } else {
-                return redirect()->back()->with('status-danger', 'Erro ao Salvar imagems :[!');
+                return redirect()->back()->with('status-danger', 'Ocorreu um erro enquanto salvava as imagems :[!');
             }
         }
-        return redirect()->back()->with('status-success', 'Imagens enviadas :)!');        
+        return redirect()->back()->with('status-success', 'Imagens enviadas com sucesso:)!');     
     }
 
     /**

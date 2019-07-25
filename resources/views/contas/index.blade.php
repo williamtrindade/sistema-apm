@@ -3,20 +3,16 @@
 @section('content')
 <div class="container">
         <div class="columns">
-            <div class="column is-12-desktop is-12-mobile">
-                
+            <div class="column is-12-desktop is-12-mobile">   
                 <h1 class="title is-4 ">Prestação de Contas</h1>
-                <a href="{{ route('contas.create') }}" class="button is-primary" style="margin-bottom:2%;">Cadastrar Prestação de Contas</a>
-             
+                <a href="{{ route('contas.create') }}" class="btn btn-primary" style="margin-bottom:2%;">Cadastrar Prestação de Contas</a>
                 <div class="box">
+                    @include('includes.notification')
                     @if($contas->count() > 0)
-                    <div class="control has-icons-left has-icons-right">
-                            <input class="input" type="email" placeholder="Buscar ano">
-                            <span class="icon is-small is-left">
-                                <i class="fas fa-search"></i>
-                            </span>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="busca" placeholder="Busca por um ano">
                         </div>
-                        <table class="table is-fullwidth">
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <th>Data</th>
@@ -27,13 +23,13 @@
                             <tbody>
                                 @foreach ($contas as $conta)
                                 <tr>
-                                    <td>{{ $conta->created_at->format('d-m-y') }}</td>
+                                    <td>{{ $conta->created_at->format('d-m-Y') }}</td>
                                     <th><a href="{{asset('storage/contas/'.$conta->arquivo)}}">{{  $conta->arquivo }}</a></th>
                                     <th>
                                         <form method="POST" action="{{ route('contas.destroy', $conta) }}">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="button is-danger"><i class="fas fa-trash"></i></button>
+                                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                                         </form>  
                                     </th>
                                 </tr>
@@ -42,8 +38,8 @@
                         </table>  
                         {{ $contas->links() }}
                     @else
-                        <div class="box">
-                            <h1 class="title is-6">Sem Prestação de contas!</h1>
+                        <div class="alert alert-success" role="alert">
+                            Sem Prestação de contas!
                         </div>
                     @endif                 
                   

@@ -47,9 +47,9 @@ class ContaController extends Controller
         $fileName = Carbon::now().'.'.$fileExtension;
         if($request->arquivo->storeAs('contas', $fileName)) {
             Conta::create(['arquivo' => $fileName]);
-            return redirect()->back()->with('status-success', 'Arquivo enviado :)!');
+            return redirect()->action('ContaController@index')->with('status-success', 'Arquivo enviado :)!');
         } else {
-            return redirect()->back()->with('status-danger', 'Erro ao Salvar Arquivo :[!');
+            return redirect()->action('ContaController@index')->with('status-danger', 'Erro ao Salvar Arquivo :[!');
         }
     }
 
