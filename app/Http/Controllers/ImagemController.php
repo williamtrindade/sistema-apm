@@ -54,8 +54,8 @@ class ImagemController extends Controller
             ImagemCategoria::create(['nome' => $request->categoria]);
             $categoria = ImagemCategoria::where('nome', $request->categoria)->first();
         }
-        // Salva Imagens
         
+        // Salva Imagens
         $imagensUploades = $request->imagem;
         foreach($imagensUploades as $image) {
             $fileExtension = $image->extension();
