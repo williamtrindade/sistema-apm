@@ -37,7 +37,7 @@
                     </div>
                     <div class="card-body">
                         <h1>{{ $avisos }}</h1>
-                        <p class="card-text">Cadastrada(s).</p>
+                        <p class="card-text">Cadastrado(s).</p>
                         <a href="{{ route('avisos.index') }}" class="btn btn-primary">Acesse</a>
                     </div>
                   </div>

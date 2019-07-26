@@ -1,3 +1,8 @@
+<style>
+        .pages-f li a {
+            font-size: 100%;
+        }
+    </style>
 <!----------- Footer ------------>
 <footer class="footer-bs">
     <div class="row">
@@ -7,10 +12,10 @@
         <div class="col-md-4 footer-nav animated fadeInUp">
             <h4>Menu —</h4>
             <div class="col-md-6">
-                <ul class="pages">
+                <ul class="pages pages-f">
                     <li><a href="{{ route('home.avisos.index') }}">Avisos</a></li>
                     <li><a href="{{ route('home.diretoria.index') }}">Diretoria</a></li>
-                    <li><a href="{{ route('home.index') }}#estatuto">Estatuto</a></li>
+                    <li><a href="{{ route('home.estatuto.index') }}">Estatuto</a></li>
                     <li><a href="{{ route('home.contas.index') }}">Prestação de Contas</a></li>
                     <li><a href="{{ route('home.index') }}#funcionarios">Funcionários</a></li>
                     <li><a href="{{ route('home.albuns.index') }}">Galeria de Imagens</a></li>

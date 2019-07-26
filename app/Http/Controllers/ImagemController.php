@@ -45,6 +45,7 @@ class ImagemController extends Controller
             'imagem' => 'required',
             'imagem.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
+        //dd($request->imagem);
         $categoriaBanco = ImagemCategoria::where('nome', $request->categoria)->first();
         $categoria = NULL;
         if($categoriaBanco) {
@@ -54,6 +55,7 @@ class ImagemController extends Controller
             $categoria = ImagemCategoria::where('nome', $request->categoria)->first();
         }
         // Salva Imagens
+        
         $imagensUploades = $request->imagem;
         foreach($imagensUploades as $image) {
             $fileExtension = $image->extension();

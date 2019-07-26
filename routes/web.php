@@ -13,6 +13,9 @@ Route::post('/send-email', 'HomeController@contatoMail')->name('email.send');
 Route::get('/avisos', 'HomeController@showAllAvisos')->name('home.avisos.index');
 Route::get('/avisos/{id}', 'HomeController@showAviso')->name('home.avisos.show');
 
+// Estatuto
+Route::get('/estatuto', 'HomeController@showEstatuto')->name('home.estatuto.index');
+
 // Contas
 Route::get('/prestacao-de-contas', 'HomeController@showYearsContas')->name('home.contas.index');
 Route::get('/prestacao-de-contas/{year}', 'HomeController@showMonthsContas')->name('home.contas.months');

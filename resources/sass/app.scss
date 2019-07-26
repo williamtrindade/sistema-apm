@@ -7,13 +7,12 @@ h1, h2, h3, h4, h5, h6, p, a {
     font-family: 'Roboto Condensed', sans-serif;
 
 }
-#banner div div {
-    background-color: rgba(0, 0, 0, 0.5);
-}
+
 #banner {
+    background-color: red;
     text-align: center;
     background-attachment: fixed;
-    background-position: bottom;
+    background-position: center;
     background-image: url('/img/banner.jpg');
     background-size: cover;
 }

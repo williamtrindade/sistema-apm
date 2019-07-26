@@ -9,8 +9,8 @@ class ImagemCategoria extends Model
     protected $table = 'imagem_categorias';
     protected $fillable = ['nome'];
 
-    public function imagens()
+    public function subCategorias()
     {
-        return $this->hasMany('App\Imagem', 'category_id');
+        return $this->hasMany('App\ImagemSubCategoria', 'category_id');
     }
 }

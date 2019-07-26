@@ -9,8 +9,8 @@ class Imagem extends Model
     protected $table = 'imagems';
     protected $fillable = ['imagem', 'category_id'];
 
-    public function categoria()
+    public function subCategoria()
     {
-        return $this->belognsTo('App\ImagemCategoria', 'category_id');
+        return $this->belognsTo('App\ImagemSubCategoria');
     }
 }

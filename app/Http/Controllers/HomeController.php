@@ -9,6 +9,8 @@ use App\ImagemCategoria;
 use App\Imagem;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContatoMail;
+use DateTime;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -29,35 +31,40 @@ class HomeController extends Controller
         $contas = Conta::all();
         $years = array();
         foreach ($contas as $conta) {     
-            $anoDaConta = $conta->created_at->format('Y');
+            $data = new DateTime($conta->data);
+            $anoDaConta = $data->format('Y');
             if(!in_array($anoDaConta, $years)) {
                 array_push($years, $anoDaConta);
             }
         }
-        return view('public.contas.index', compact('years'));
+        rsort($years);
+        return view('public.contas.index')->with('years', $years );
     }
 
     public function showMonthsContas($year)
     {
         $contas = Conta::all();
         $months = array();
-        foreach ($contas as $conta) {     
-            $anoDaConta = $conta->created_at->format('Y');
+        foreach ($contas as $conta) {   
+            $data =   new DateTime($conta->data);
+            $anoDaConta = $data->format('Y');
             if($anoDaConta == $year) {
-                $mesDaConta = $conta->created_at->format('m');
+                $data =   new DateTime($conta->data);
+                $mesDaConta = $data->format('m');
                 if(!in_array($mesDaConta, $months)) {
                     array_push($months, $mesDaConta);
                 }
             }
         }
+        rsort($months);
         return view('public.contas.index', compact('months', 'year'));
     }
 
     public function showConta($month, $year)
     {
         $contasBanco = Conta::all();
-        foreach ($contasBanco as $conta) {     
-            if($conta->created_at->format('Y') == $year && $conta->created_at->format('m') == $month ) {
+        foreach ($contasBanco as $conta) {
+            if((new Carbon($conta->data))->format('Y') == $year && (new Carbon($conta->data))->format('m') == $month ) {
                 return response()->download('storage/contas/'.$conta->arquivo);
             }
         }
@@ -90,5 +97,10 @@ class HomeController extends Controller
             ->with('avisos', $avisos)
             ->with('email-sent', 'Email Enviado com sucesso');
         
+    }
+
+    public function showEstatuto()
+    {
+        return view('public.estatuto.index');
     }
 }

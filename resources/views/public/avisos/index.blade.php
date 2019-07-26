@@ -12,7 +12,7 @@
                         @if($aviso->conteudo)
                             {!! $aviso->conteudo !!}
                         @endif
-                        <a href="{{asset('storage/avisos/'.$aviso->pdf)}}">Ver Arquivo do Aviso</a>
+                        <a href="{{asset('storage/avisos/'.$aviso->pdf)}}">Ver Anexo do Aviso</a>
                     @else
                         {!! $aviso->conteudo !!}
                     @endif

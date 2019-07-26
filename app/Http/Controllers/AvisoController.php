@@ -38,7 +38,7 @@ class AvisoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         $request->validate([
             'titulo' => 'required|max:255',
             'pdf' => 'mimes:pdf|max:2048',

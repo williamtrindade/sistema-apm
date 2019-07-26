@@ -42,9 +42,10 @@
                             {{$message}}
                         </div>
                     @enderror
+
                     <!-- CATEGORIA -->
                     <div class="form-group">
-                        <label for="categoria">Crie ou Digite o nome de um Álbum já existente </label>
+                        <label for="categoria">Álbum</label>
                         <input required min="3" max="200" name="categoria" class="form-control" id="categoria" type="text" placeholder="Digine o nome do álbum">
                     </div>  
                     @error('categoria')
@@ -52,13 +53,34 @@
                             {{$message}}
                         </div>
                     @enderror
-                    <button type="submit" class="btn btn-success">Salvar Imagens</button>
 
+                    <!-- SUB CATEGORIA -->
+                    <div class="form-group">
+                        <label for="categoria">SubÁlbum</label>
+                        <input required min="3" max="200" name="sub_categoria" class="form-control" id="categoria" type="text" placeholder="Digine o nome do álbum">
+                    </div>  
+                    @error('sub_categoria')
+                        <div class="alert alert-danger" role="alert">
+                            {{$message}}
+                        </div>
+                    @enderror
+
+                    <!-- DESCRIÇÃO DAS FOTOS -->
+                    <div class="form-group">
+                        <label for="categoria">Descrição do Álbum </label>
+                        <input required min="3" max="200" name="descricao" class="form-control" id="categoria" type="text" placeholder="Digine o nome do álbum">
+                    </div>  
+                    @error('descricao')
+                        <div class="alert alert-danger" role="alert">
+                            {{$message}}
+                        </div>
+                    @enderror
+                    <button type="submit" class="btn btn-success">Salvar Imagens</button>
                 </form>
             </div>
         </div>
     </div>
-            <hr>
+    <hr>
     <div class="row">    
         <div class="col-md-12">
             <div class="card shadow p-4">

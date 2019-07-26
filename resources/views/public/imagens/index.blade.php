@@ -26,7 +26,7 @@
                     @if ($album->imagens->count() > 0)
                         <ul>
                             <li>
-                                <a href="{{ route('home.imagens.show', $album->id) }}">{{ $album->nome }}</a>
+                                <a style="font-size:150%" href="{{ route('home.imagens.show', $album->id) }}">{{ $album->nome }}</a>
                             </li>
                         </ul>
                     @endif

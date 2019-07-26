@@ -5,11 +5,55 @@
         <div class="col-md-12">
             <div class="p-1 shadow" id="banner">
                 <div class="container">
-                    <div class="mt-5 mb-5 p-4"><h1>Associação de Pais e mestres do colégio militar de Santa Maria</h1></div>
+                    <div class=" p-4">
+                        <h1 style="color:#fff">
+                            <b>Associação de Pais e Mestres do Colégio Militar de Santa Maria</b>
+                        </h1>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <style>
+        #banner {
+            text-align: center;
+            background-attachment: fixed;
+            background-position: top;
+            background-image: url('/img/banner.jpg');
+            background-size: cover;
+        }
+        #banner div div h1 {
+            margin-top:8%;
+            margin-bottom:8%;
+            font-size: 230%;
+            color:#fff;
+            text-shadow: -5px 3px 20px #000000;        }
+    </style>
+    <div class=" m-3" style="border-top:2px green solid">
+        <div class="row">
+            <div class="col-md-12 ">
+                <h4 class="text-center m-3">Acesso Rápido</h4>
+                <div class="col-md-12">
+                    <ul class="pages">
+                        <li><a href="{{ route('home.avisos.index') }}">Avisos</a></li>
+                        <li><a href="{{ route('home.diretoria.index') }}">Diretoria</a></li>
+                        <li><a href="{{ route('home.estatuto.index') }}">Estatuto</a></li>
+                        <li><a href="{{ route('home.contas.index') }}">Prestação de Contas</a></li>
+                        <li><a href="{{ route('home.index') }}#funcionarios">Funcionários</a></li>
+                        <li><a href="{{ route('home.albuns.index') }}">Galeria de Imagens</a></li>
+                        <li><a href="{{ route('home.index') }}#contato">Contato</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .pages li a {
+            font-size: 140%;
+        }
+    </style>
+
+        
     <div class=" m-3" style="border-top:2px green solid">
         <div class="row">
             <div class="col-md-12">
@@ -24,7 +68,6 @@
                         <hr>
                     @endforeach
                     <div class="card-body">
-
                         <a href="{{ route('home.avisos.index') }}" class="btn btn-primary">
                             Ver Todos Avisos
                         </a>
@@ -65,7 +108,7 @@
                         <p>Auxiliares Administrativas:</p>
                         <ul>      
                             <li>Patrícia de Miranda Rossi</li>
-                            <li> Jane Dias Torri.</li>
+                            <li>Jane Dias Torri</li>
                         </ul>
                         <p>Assistente Social:</p>
                         <ul>      
@@ -78,13 +121,13 @@
                 <div class="   p-3">        
                     <h5><i class="fas fa-clock"></i> Horário de Funcionamento ao Público externo</h5>
                     <div class="card-body">
-                        <p>Segunda á Quinta:</p>
+                        <p>Segunda a Quinta:</p>
                         <ul>
-                            <li> 7h30min às 12h - 13h30min às 16h30min</li>
+                            <li>7h30min às 12h - 13h30min às 16h30min</li>
                         </ul>
                         <p>Sexta-feira:</p>
                         <ul>
-                            <li> 7h30min às 12h</li>
+                            <li>7h30min às 12h</li>
                         </ul>
                     </div>
                 </div>
@@ -135,7 +178,7 @@
 
                             <h5><b>Presidente (Paulo Pinho):</b></h5>
                             <p>E-mail: <a href="mailto:psdps@hotmail.com">psdps@hotmail.com</a> </p>
-                            <p>Fones: (055) 9148-7260 (Claro) / (055) 9665-0450 (Vivo)</p>
+                            <p>Fones: (055) 9665-0450 (Vivo) / (055) 9148-7260 (Claro)</p>
                         </div>
                     </div>
                 </div>

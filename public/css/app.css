@@ -11115,10 +11115,6 @@ a {
   font-family: "Roboto Condensed", sans-serif;
 }
 
-#banner div div {
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
 #banner {
   text-align: center;
   background-attachment: fixed;

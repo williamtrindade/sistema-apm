@@ -59,6 +59,7 @@
     <main>
         @yield('content')   
         @include('includes.footer')
+        @include('includes.backtop')
     </main>
 </body>
 <!-- Scripts -->

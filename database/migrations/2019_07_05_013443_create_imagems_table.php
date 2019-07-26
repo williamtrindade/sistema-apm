@@ -16,8 +16,10 @@ class CreateImagemsTable extends Migration
         Schema::create('imagems', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('imagem');
-            $table->unsignedBigInteger('category_id')->foreign('category_id')->references('id')->on('imagem_categorias');
-        
+            $table->unsignedBigInteger('subcategory_id')
+                ->foreign('subcategory_id')
+                ->references('id')
+                ->on('imagem_sub_categorias');
             $table->timestamps();
         });
     }

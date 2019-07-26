@@ -10,7 +10,7 @@
                     <ul>
                         @foreach ($years as $year)
                             <li>
-                                <a href="{{ route('home.contas.months', $year) }}">
+                                <a style="font-size:150%;" href="{{ route('home.contas.months', $year) }}">
                                 Ano de {{ $year }}
                                 </a>
                             </li>
@@ -31,7 +31,7 @@
                     <ul>
                         @foreach ($months as $month)
                             <li>
-                                <a href="{{ route('home.contas.show', [$month, $year]) }}" >
+                                <a style="font-size:150%;" href="{{ route('home.contas.show', [$month, $year]) }}" >
                                 Mês {{ $month }}
                                 </a>
                             </li>

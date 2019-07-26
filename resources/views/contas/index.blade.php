@@ -23,7 +23,7 @@
                             <tbody>
                                 @foreach ($contas as $conta)
                                 <tr>
-                                    <td>{{ $conta->created_at->format('d-m-Y') }}</td>
+                                    <td>{{ Carbon\Carbon::parse($conta->data)->format('d/m/Y ') }}</td>
                                     <th><a href="{{asset('storage/contas/'.$conta->arquivo)}}">{{  $conta->arquivo }}</a></th>
                                     <th>
                                         <form method="POST" action="{{ route('contas.destroy', $conta) }}">

@@ -8,6 +8,7 @@ use Date;
 use App\Conta;
 use Storage;
 use Carbon\Carbon;
+use DateTime;
 
 class ContaController extends Controller
 {
@@ -18,7 +19,7 @@ class ContaController extends Controller
      */
     public function index()
     {
-        return view('contas.index')->with('contas', Conta::orderBy('created_at', 'DESC')->paginate(8));
+        return view('contas.index')->with('contas', Conta::orderBy('data', 'DESC')->paginate(8));
     }
 
     /**
@@ -40,13 +41,18 @@ class ContaController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'arquivo' => 'mimes:pdf|max:2048'
+            'arquivo' => 'required|mimes:pdf|max:2048',
+            'data' => 'required'
         ]);
         $fileUploaded = $request->arquivo;
         $fileExtension = $fileUploaded->extension();
         $fileName = Carbon::now().'.'.$fileExtension;
+        //$date = DateTime::createFromFormat('Y-m-d', $request->data);
         if($request->arquivo->storeAs('contas', $fileName)) {
-            Conta::create(['arquivo' => $fileName]);
+            Conta::create([
+                'arquivo' => $fileName, 
+                'data' => DateTime::createFromFormat('Y-m-d', $request->data)
+            ]);
             return redirect()->action('ContaController@index')->with('status-success', 'Arquivo enviado :)!');
         } else {
             return redirect()->action('ContaController@index')->with('status-danger', 'Erro ao Salvar Arquivo :[!');

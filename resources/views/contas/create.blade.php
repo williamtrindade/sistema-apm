@@ -14,14 +14,23 @@
                                 <span class="input-group-text" id="arquivo">Arquivo</span>
                             </div>
                             <div class="custom-file">
-                                <input name="arquivo" type="file" class="custom-file-input" id="arquivo" aria-describedby="arquivo">
+                                <input required name="arquivo" type="file" class="custom-file-input" id="arquivo" aria-describedby="arquivo">
                                 <label class="custom-file-label" for="arquivo">Escolha um arquivo</label>
                             </div>
                             @error('arquivo')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
+                            
                         </div>
-                        <p>A data é colocada automaticamente :)</p>
+                        <div class="form-group">
+                            <label for="data">Data</label>
+                            <div>
+                                <input name="data" class="form-control" type="date"  id="data">
+                            </div>
+                        </div>
+                        @error('data')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <button type="submit" class="btn btn-success">Cadastrar</button>
                         <a href="{{ route('contas.index') }}" class="btn btn-link">Cancelar</a>
                     </form>
