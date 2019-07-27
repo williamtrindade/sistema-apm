@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Imagem extends Model
 {
     protected $table = 'imagems';
-    protected $fillable = ['imagem', 'category_id'];
+    protected $fillable = ['imagem'];
 
-    public function subCategoria()
+    public function album()
     {
-        return $this->belognsTo('App\ImagemSubCategoria');
+        return $this->belognsTo('App\Album', 'album_id');
     }
 }

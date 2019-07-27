@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateImagemSubCategoriasTable extends Migration
+class CreateAlbumsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,18 @@ class CreateImagemSubCategoriasTable extends Migration
      */
     public function up()
     {
-        Schema::create('imagem_sub_categorias', function (Blueprint $table) {
+        Schema::create('albums', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nome');
-            $table->string('descricao');
-            $table->unsignedBigInteger('category_id')
-                ->foreign('subcategory_id')
+            $table->integer('nivel');
+            $table->longText('descricao')->nullable();
+
+            $table->unsignedBigInteger('owner_album_id')
+                ->foreign('owner_album_id')
                 ->references('id')
-                ->on('imagem_categorias');
+                ->on('album')
+                ->nullable();
+
             $table->timestamps();
         });
     }
@@ -32,6 +36,6 @@ class CreateImagemSubCategoriasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('imagem_sub_categorias');
+        Schema::dropIfExists('albums');
     }
 }

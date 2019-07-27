@@ -71,7 +71,6 @@
         document.querySelector('#enviar').addEventListener('click', function() {
             const textEditor = document.querySelector('.ql-editor');
             const hiddenInput = document.querySelector('#conteudo');
-
             hiddenInput.setAttribute('value', textEditor.innerHTML);
         });
     </script>

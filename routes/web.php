@@ -31,4 +31,9 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::resource('avisos', 'AvisoController');
     Route::resource('contas', 'ContaController');
     Route::resource('imagens', 'ImagemController');
+    Route::resource('albums', 'AlbumController');
+
+    Route::get('albums/{id}/create', 'SubAlbumController@create')->name('sub-albums.create');
+    Route::get('sub-albums/{id}', 'SubAlbumController@show')->name('sub-albums.show');
+    Route::post('albums/sub/create', 'SubAlbumController@store')->name('sub-albums.store');
 });

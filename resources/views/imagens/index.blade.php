@@ -28,6 +28,7 @@
                 <form action="{{ route('imagens.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('POST')
+                    <!--ALBUNS-->
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="imagens">Imagens</span>
@@ -39,7 +40,7 @@
                     </div>
                     @error('imagem')
                         <div class="alert alert-danger" role="alert">
-                            {{$message}}
+                            {{ $message }}
                         </div>
                     @enderror
 
@@ -66,15 +67,17 @@
                     @enderror
 
                     <!-- DESCRIÇÃO DAS FOTOS -->
-                    <div class="form-group">
-                        <label for="categoria">Descrição do Álbum </label>
-                        <input required min="3" max="200" name="descricao" class="form-control" id="categoria" type="text" placeholder="Digine o nome do álbum">
-                    </div>  
-                    @error('descricao')
-                        <div class="alert alert-danger" role="alert">
-                            {{$message}}
-                        </div>
+                    <!-- Create the editor container -->
+                    <label class="label">Conteúdo</label>
+                    <div id="editor" class="field">
+                        
+                    </div>
+
+                    <input type="hidden" name="conteudo" id="conteudo">                      
+                    @error('conteudo')
+                        <div class="alert alert-danger">{{$message}}</div>
                     @enderror
+                    
                     <button type="submit" class="btn btn-success">Salvar Imagens</button>
                 </form>
             </div>
