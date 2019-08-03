@@ -36,7 +36,7 @@
 
                     <hr>
                     <button type="submit" class="btn btn-success" id="enviar">Cadastrar</button>
-                    <a href="{{ route('albums.show', $album->id) }}" class="btn btn-link">Cancelar</a>
+                    <a href="{{ route('sub-albums.show', $album->id) }}" class="btn btn-link">Cancelar</a>
                 </form>
             </div>
         </div>

@@ -9,9 +9,7 @@
                 <div class="box">
                     @include('includes.notification')
                     @if($contas->count() > 0)
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="busca" placeholder="Busca por um ano">
-                        </div>
+                       
                         <table class="table">
                             <thead>
                                 <tr>

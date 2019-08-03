@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Album;
 use App\Imagem;
+use Storage;
 
 class AlbumController extends Controller
 {
@@ -16,7 +17,7 @@ class AlbumController extends Controller
     public function index()
     {
         return view('albums.index')
-            ->with('albums', Album::where('nivel', 0)->get());
+            ->with('albums', Album::where('nivel', 0)->orderBy('created_at', 'DESC')->paginate('10'));
     }
 
     /**
@@ -62,10 +63,11 @@ class AlbumController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function edit($id)
     {
-        //
+        $album = Album::find($id);
+        return view('albums.edit')->with('album', $album);
     }
 
     /**
@@ -77,7 +79,13 @@ class AlbumController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $album = Album::find($id);
+        $album->update($request->all());
+        if($album->nivel == 0) {
+            return redirect()->route('albums.index')->with('status-success', 'Álbum editado com sucesso!');
+        }
+        return redirect()->route('sub-albums.show', $album->owner_album_id)->with('status-success', 'Álbum editado com sucesso!');
+
     }
 
     /**
@@ -88,6 +96,37 @@ class AlbumController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $album = Album::find($id);
+        if($album->imagens()->count() > 0) {
+            foreach ($album->imagens as $image) {
+                $this->destroyImage($image->id);
+            }
+        }
+        if($album->albums()->count() > 0) {
+            foreach ($album->albums as $albumF) {
+                $this->destroyAlbum($albumF->id);
+            }
+        }
+        $album->delete();
+        return redirect()->route('albums.index')->with('status-success', 'Álbum '.$album->nome.' apagado com sucesso!');
+
+    }
+
+    public function destroyImage($id)
+    {
+        $imagem = Imagem::find($id);
+        Storage::disk('public')->delete('imagens/'.$imagem->imagem);
+        $imagem->delete();
+    }
+
+    public function destroyAlbum($id) {
+        $album = Album::find($id);
+        if($album->imagens()->count() > 0) {
+            foreach ($album->imagens as $image) {
+                $this->destroyImage($image->id);
+            }
+        }
+        $album->delete();
+
     }
 }

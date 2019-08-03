@@ -2,13 +2,13 @@
 		<div class="row">
             @foreach ($imagens as $imagem)
                 <div class="col-lg-3 col-md-4 col-xs-6  img-fluid">
-                    <a onclick="apagar({{ $imagem->id }})" class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="" data-image="{{ asset('storage/imagens/'.$imagem->imagem) }}" data-target="#image-gallery">
-                        <img class="img-thumbnail" src="{{ asset('storage/imagens/'.$imagem->imagem) }}" alt="Another alt text">
+                    <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="" data-image="{{ asset('storage/imagens/'.$imagem->imagem) }}" data-target="#image-gallery">
+                        <img class="img-thumbnail " src="{{ asset('storage/imagens/'.$imagem->imagem) }}" alt="Another alt text">
                     </a>
-                    <form style="bottom:0;right:0;position:absolute" method="POST" action="{{ route('imagens.destroy', $imagem->id) }}">
+                    <form style="top:0;position:absolute" method="POST" action="{{ route('imagens.destroy', $imagem->id) }}">
                         @csrf
                         @method('DELETE')
-                        <button style="border: none;background:none" type="submit"><i style="color:green" class="fas fa-trash"></i></button>
+                        <button class="btn btn-sm btn-danger" style="top:0" type="submit"><i  class="fas fa-trash"></i> Apagar</button>
                     </form>  
                 </div>
             @endforeach

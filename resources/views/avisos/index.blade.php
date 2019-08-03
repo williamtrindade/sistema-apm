@@ -10,9 +10,6 @@
              
                 <div>
                     @if(count($avisos) > 0)
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="busca" placeholder="Pesquise Avisos">
-                        </div>
                         <table class="table is-fullwidth">
                             <thead>
                                 <tr>
@@ -42,8 +39,8 @@
                         </table>
                         {{$avisos->links()}}
                     @else 
-                        <div class="box">
-                            <h1 class="title is-6">Sem Avisos!</h1>
+                        <div class="alert alert-success" role="alert">
+                        Você não cadastrou Avisos!
                         </div>
                     @endif
                    

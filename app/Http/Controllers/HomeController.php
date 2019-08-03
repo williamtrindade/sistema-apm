@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Aviso;
 use App\Conta;
-use App\ImagemCategoria;
 use App\Imagem;
+use App\Album;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContatoMail;
 use DateTime;
@@ -72,17 +72,22 @@ class HomeController extends Controller
 
     public function showAllAlbuns()
     {
-        $albuns = ImagemCategoria::all();
-        return view('public.imagens.index', compact('albuns'));
+        return view('public.imagens.index')->with('albums', Album::where('nivel', 0)
+            ->orderBy('created_at', 'DESC')->get());
     }
 
-    public function showAlbum($id)
+    public function showSubAlbuns($id)
     {
-        $imagens = ImagemCategoria::find($id)->imagens;
-        $album = ImagemCategoria::find($id);
-        return view('public.imagens.index', compact('imagens', 'album'));
+        $album = album::find($id);
+        return view('public.imagens.show', compact('album'));
     }
 
+    public function showImagens($albumId, $subAlbumId)
+    {
+        $album = album::find($subAlbumId);
+        return view('public.imagens.imagens', compact('album'));
+
+    }
     public function showDiretoria()
     {
         return view('public.diretoria.index');
@@ -91,7 +96,7 @@ class HomeController extends Controller
     public function contatoMail(Request $request)
     {
         $avisos = Aviso::orderBy('created_at', 'DESC')->take(3)->get();
-        Mail::to('williamtrindade777@gmail.com')->send(new ContatoMail($request));
+        Mail::to('apmcmsm@gmail.com')->send(new ContatoMail($request));
 
         return redirect()->back()
             ->with('avisos', $avisos)
@@ -102,5 +107,20 @@ class HomeController extends Controller
     public function showEstatuto()
     {
         return view('public.estatuto.index');
+    }
+
+    public function showFuncionarios()
+    {
+        return view('public.funcionarios.index');
+    }
+
+    public function showContato()
+    {
+        return view('public.contato.index');
+    }
+
+    public function showHorario()
+    {
+        return view('public.horario.index');
     }
 }

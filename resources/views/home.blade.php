@@ -39,9 +39,10 @@
                         <li><a href="{{ route('home.diretoria.index') }}">Diretoria</a></li>
                         <li><a href="{{ route('home.estatuto.index') }}">Estatuto</a></li>
                         <li><a href="{{ route('home.contas.index') }}">Prestação de Contas</a></li>
-                        <li><a href="{{ route('home.index') }}#funcionarios">Funcionários</a></li>
+                        <li><a href="{{ route('home.funcionarios.index') }}">Funcionários</a></li>
                         <li><a href="{{ route('home.albuns.index') }}">Galeria de Imagens</a></li>
-                        <li><a href="{{ route('home.index') }}#contato">Contato</a></li>
+                        <li><a href="{{ route('home.contato.index') }}">Contato</a></li>
+                        <li><a href="{{ route('home.horario.index')}}">Horário de Funcionamento ao Público externo</a></li>
                     </ul>
                 </div>
             </div>
@@ -174,11 +175,11 @@
                             <h5>Entre em contato conosto</h5>
                             <h5 class="mt-3"><b>Secretaria</b> </h5>
                             <p>E-mail: <a href="mailto:apmcmsm@gmail.com">apmcmsm@gmail.com</a> </p> 
-                            <p>Fones: (055) 3213-2104 / (055) 32184366</p>
+                            <p>Fones: (055) 3213-2104 / (055) 3218-4366</p>
 
                             <h5><b>Presidente (Paulo Pinho):</b></h5>
                             <p>E-mail: <a href="mailto:psdps@hotmail.com">psdps@hotmail.com</a> </p>
-                            <p>Fones: (055) 9665-0450 (Vivo) / (055) 9148-7260 (Claro)</p>
+                            <p>Fones: (055) 9665-0450 (Whatsapp/Vivo) / (055) 9148-7260 (Claro)</p>
                         </div>
                     </div>
                 </div>

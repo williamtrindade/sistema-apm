@@ -21,14 +21,23 @@
     <div class="row">
         <div class="col-md-12">
             <h1>Galeria de Imagens</h1>
+            <a href="{{ route('sub-albums.show', $album->owner_album_id) }}" class="btn btn-secondary" style="margin-bottom:2%;"><i class="fas fa-arrow-left"></i> Voltar</a><br>
             @include('includes.notification')
 
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('albums.index') }}">Albums</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('sub-albums.show', $album->ownerAlbum->id) }}">{{ $album->ownerAlbum->nome }}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ $album->nome  }}</li>
+                </ol>
+            </nav>
             <div class="card shadow p-3">
                 <h3>Inserir Imagens</h3>
                 <form action="{{ route('imagens.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('POST')
-                    <!--ALBUNS-->
+
+                    <!--IMAGENS-->
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="imagens">Imagens</span>
@@ -44,41 +53,10 @@
                         </div>
                     @enderror
 
-                    <!-- CATEGORIA -->
-                    <div class="form-group">
-                        <label for="categoria">Álbum</label>
-                        <input required min="3" max="200" name="categoria" class="form-control" id="categoria" type="text" placeholder="Digine o nome do álbum">
-                    </div>  
-                    @error('categoria')
-                        <div class="alert alert-danger" role="alert">
-                            {{$message}}
-                        </div>
-                    @enderror
-
-                    <!-- SUB CATEGORIA -->
-                    <div class="form-group">
-                        <label for="categoria">SubÁlbum</label>
-                        <input required min="3" max="200" name="sub_categoria" class="form-control" id="categoria" type="text" placeholder="Digine o nome do álbum">
-                    </div>  
-                    @error('sub_categoria')
-                        <div class="alert alert-danger" role="alert">
-                            {{$message}}
-                        </div>
-                    @enderror
-
-                    <!-- DESCRIÇÃO DAS FOTOS -->
-                    <!-- Create the editor container -->
-                    <label class="label">Conteúdo</label>
-                    <div id="editor" class="field">
-                        
-                    </div>
-
-                    <input type="hidden" name="conteudo" id="conteudo">                      
-                    @error('conteudo')
-                        <div class="alert alert-danger">{{$message}}</div>
-                    @enderror
+                    <!--ALBUM ID-->
+                    <input type="hidden" name="album_id" value="{{ $album->id }}">
                     
-                    <button type="submit" class="btn btn-success">Salvar Imagens</button>
+                    <button type="submit" class="btn btn-success">Inserir Imagens</button>
                 </form>
             </div>
         </div>
@@ -95,20 +73,12 @@
                         Sem Imagens na Galeria
                     </div>
                 @endif
-                @if(count($imagens) > 0)
-                    {{ $imagens->links() }}
-                @endif
             </div>
         </div>
     </div>
 </div>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script>
-
-
-
-</script>
 <script>
     let modalId = $('#image-gallery');
 

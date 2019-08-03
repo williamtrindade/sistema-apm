@@ -7,6 +7,7 @@ use App\Imagem;
 use App\ImagemCategoria;
 use Storage;
 use Carbon\Carbon;
+use App\Album;
 
 class ImagemController extends Controller
 {
@@ -17,9 +18,7 @@ class ImagemController extends Controller
      */
     public function index()
     {
-        $categorias = ImagemCategoria::all();
-        $imagens = Imagem::paginate(12);
-        return view('galeria.index', compact('imagens', 'categorias'));
+      
     }
 
     /**
@@ -41,21 +40,11 @@ class ImagemController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'categoria' => 'required|min:3|max:200',
+            'album_id' => 'required',
             'imagem' => 'required',
             'imagem.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
-        //dd($request->imagem);
-        $categoriaBanco = ImagemCategoria::where('nome', $request->categoria)->first();
-        $categoria = NULL;
-        if($categoriaBanco) {
-            $categoria = $categoriaBanco;
-        } else {
-            ImagemCategoria::create(['nome' => $request->categoria]);
-            $categoria = ImagemCategoria::where('nome', $request->categoria)->first();
-        }
-        
-        // Salva Imagens
+        ]);        
+       
         $imagensUploades = $request->imagem;
         foreach($imagensUploades as $image) {
             $fileExtension = $image->extension();
@@ -63,7 +52,7 @@ class ImagemController extends Controller
             if($image->storeAs('imagens', $fileName)) {
                 Imagem::Create([
                     'imagem' => $fileName, 
-                    'category_id' => $categoria->id
+                    'album_id' => $request->album_id
                 ]);
             } else {
                 return redirect()->back()->with('status-danger', 'Ocorreu um erro enquanto salvava as imagems :[!');
@@ -80,7 +69,9 @@ class ImagemController extends Controller
      */
     public function show($id)
     {
-        //
+        $album = Album::find($id);
+        $imagens = $album->imagens;
+        return view('imagens.index', compact('imagens', 'album'));
     }
 
     /**
