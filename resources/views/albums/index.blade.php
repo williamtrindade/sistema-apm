@@ -48,7 +48,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                {{ $albums->links() }}
+                {{ $contas->links() }}
             @else
                 <div class="col-md-12">
                     <div class="alert alert-success" role="alert">

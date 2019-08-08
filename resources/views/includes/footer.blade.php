@@ -27,7 +27,7 @@
         <div class="col-md-2 footer-social animated fadeInDown">
             <h4>Redes Sociais</h4>
             <ul>
-                <li><a href="#">Facebook</a></li>
+                <li><a href="https://api.whatsapp.com/send?phone=555596650450">Whatsapp</a></li>
             </ul>
         </div>
     </div>
