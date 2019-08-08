@@ -17,7 +17,7 @@ class AlbumController extends Controller
     public function index()
     {
         return view('albums.index')
-            ->with('albums', Album::where('nivel', 0)->orderBy('created_at', 'DESC')->get());
+            ->with('albums', Album::where('nivel', 0)->orderBy('created_at', 'DESC')->paginate('10'));
     }
 
     /**
