@@ -14,9 +14,14 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(UsersTableSeeder::class);
         User::create([
-            'name' => 'Super Admin',
-            'email' =>  'admin@gmail.com',
-            'password' => bcrypt('1234567890'),
+            'name' => 'PAULO PINHO',
+            'email' =>  'apmcmsm@gmail.com',
+            'password' => bcrypt('1@5*7#0'),
+        ]); 
+        User::create([
+            'name' => 'RP',
+            'email' =>  'apmcmsm1@gmail.com',
+            'password' => bcrypt('a1b2c3@%'),
         ]); 
     }
 }

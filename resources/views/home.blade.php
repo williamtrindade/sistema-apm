@@ -30,22 +30,27 @@
             text-shadow: -5px 3px 20px #000000;        }
     </style>
     <div class=" m-3" style="border-top:2px green solid">
+                        <h4 class="text-center m-3">Acesso Rápido</h4>
+
         <div class="row">
-            <div class="col-md-12 ">
-                <h4 class="text-center m-3">Acesso Rápido</h4>
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <ul class="pages">
                         <li><a href="{{ route('home.avisos.index') }}">Avisos</a></li>
                         <li><a href="{{ route('home.diretoria.index') }}">Diretoria</a></li>
                         <li><a href="{{ route('home.estatuto.index') }}">Estatuto</a></li>
                         <li><a href="{{ route('home.contas.index') }}">Prestação de Contas</a></li>
+                        
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <ul class="pages">
                         <li><a href="{{ route('home.funcionarios.index') }}">Funcionários</a></li>
                         <li><a href="{{ route('home.albuns.index') }}">Galeria de Imagens</a></li>
                         <li><a href="{{ route('home.contato.index') }}">Contato</a></li>
                         <li><a href="{{ route('home.horario.index')}}">Horário de Funcionamento ao Público externo</a></li>
                     </ul>
+                    
                 </div>
-            </div>
         </div>
     </div>
     <style>
@@ -59,7 +64,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="  p-3">
-                    <h4 class="text-center"> Ultimos Avisos da APM</h4>
+                    <h4 class="text-center"> Últimos Avisos da APM</h4>
                     @foreach ($avisos as $aviso)
                         <div class="media">
                             <div class="media-body m-2">

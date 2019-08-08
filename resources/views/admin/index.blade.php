@@ -25,7 +25,7 @@
                     <div class="card-body">
                         <h1>{{ $imagens }}</h1>
                         <p class="card-text">Cadastrada(s).</p>
-                        <a href="{{ route('imagens.index') }}" class="btn btn-primary">Acesse</a>
+                        <a href="{{ route('albums.index') }}" class="btn btn-primary">Acesse</a>
                     </div>
                   </div>
             </div>
