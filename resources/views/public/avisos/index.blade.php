@@ -7,15 +7,9 @@
         @foreach ($avisos as $aviso)
             <li class="media shadow p-3 mb-2">
                 <div class="media-body">
-                    <h3 class="mt-0 mb-1">{{ $aviso->titulo }}</h3>
-                    @if ($aviso->pdf)
-                        @if($aviso->conteudo)
-                            {!! $aviso->conteudo !!}
-                        @endif
-                        <a href="{{asset('storage/avisos/'.$aviso->pdf)}}">Ver Anexo do Aviso</a>
-                    @else
-                        {!! $aviso->conteudo !!}
-                    @endif
+                    <a href="{{ route('home.avisos.show', $aviso->id) }}" class="mt-0 mb-1">
+                        <h3>{{ $aviso->titulo }}</h3>
+                    </a>
                     <hr>
 
                     <div class="row">
