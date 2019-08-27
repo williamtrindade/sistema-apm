@@ -26,6 +26,12 @@ class HomeController extends Controller
         return view('public.avisos.index', compact('avisos'));
     }
 
+    public function showAviso($id)
+    {
+        $aviso = Aviso::find($id);
+        return view('public.avisos.show', compact('aviso'));
+    }
+
     public function showYearsContas()
     {
         $contas = Conta::all();
