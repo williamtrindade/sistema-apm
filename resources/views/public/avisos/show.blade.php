@@ -10,12 +10,13 @@
             @if($aviso->conteudo)
                 {!! $aviso->conteudo !!}
             @endif
-            <a href="{{asset('storage/avisos/'.$aviso->pdf)}}">Ver Anexo do Aviso</a>
+            <a href="{{asset('storage/avisos/'.$aviso->pdf)}}">Ver anexo</a>
+            <iframe src="{{asset('storage/avisos/'.$aviso->pdf)}}" frameborder="0" width="100%" height="900px"></iframe>
+            
         @else
             {!! $aviso->conteudo !!}
         @endif
         <hr>
-
         <div class="row">
             <div class="col-md-9"></div>
             <div class="col-md-3"> Públicado em {{ $aviso->created_at->format('d/m/Y') }}</div>

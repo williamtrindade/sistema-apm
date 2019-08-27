@@ -68,7 +68,11 @@
                     @foreach ($avisos as $aviso)
                         <div class="media">
                             <div class="media-body m-2">
-                                <h5 class="mt-0">{{ $aviso->titulo }}</h5>
+                            <h5 class="mt-0">
+                                <a href="{{ route('home.avisos.show', $aviso->id) }}" class="mt-0 mb-1">
+                                    {{ $aviso->titulo }}
+                                </a>
+                            </h5>
                             </div>
                         </div>   
                         <hr>
