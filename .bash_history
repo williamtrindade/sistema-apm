@@ -121,3 +121,23 @@ ls
 mysql -u root -p
 ls
 mysql
+git add *
+git add .
+git status
+git commit -m "update do server"
+git config --global user.email "williamtrindade777@gmail.com"
+git config --global user.name "William Trindade"
+git commit -m "update do server"
+git push
+git pull
+git push
+git pull
+git commit -m "update do server"
+git push
+code
+git pull
+git pull
+git pull
+git pull
+git pull
+ls
