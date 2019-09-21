@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="col-md-2 footer-social animated fadeInDown">
-            <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js" integrity="sha256-XmdRbTre/3RulhYk/cOBUMpYlaAp2Rpo/s556u0OIKk=" crossorigin="anonymous"></script>
             <script>
                     // Make a request for a user with a given ID
                     axios.get('/visitas')
