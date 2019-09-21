@@ -11,7 +11,7 @@
 
         gtag('config', 'UA-147667083-1');
     </script>
-
+    <script src="https://cdnjs.com/libraries/Chart.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
