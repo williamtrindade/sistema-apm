@@ -11,13 +11,16 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\ContatoMail;
 use DateTime;
 use Carbon\Carbon;
+use Analytics;
+use Spatie\Analytics\Period;
 
 class HomeController extends Controller
 {
     public function index()
     {
         $avisos = Aviso::orderBy('created_at', 'DESC')->take(3)->get();
-        return view('home', compact('avisos'));    
+        $visitas = Analytics::fetchMostVisitedPages(Period::days(5000))['0']['pageViews'];
+        return view('home', compact('avisos', 'visitas'));    
     }
 
     public function showAllAvisos()

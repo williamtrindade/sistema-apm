@@ -1,6 +1,9 @@
 <?php
 Auth::routes(['register' => false]);
 
+// Visitas
+Route::get('/visitas', 'AnalyticsController@index')->name('home.visitas');
+
 // Static Pages
 Route::get('/', 'HomeController@index')->name('home.index');
 

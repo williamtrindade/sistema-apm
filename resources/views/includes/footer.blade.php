@@ -1,8 +1,8 @@
 <style>
-        .pages-f li a {
-            font-size: 100%;
-        }
-    </style>
+    .pages-f li a {
+        font-size: 100%;
+    }
+</style>
 <!----------- Footer ------------>
 <footer class="footer-bs">
     <div class="row">
@@ -25,6 +25,25 @@
             </div>
         </div>
         <div class="col-md-2 footer-social animated fadeInDown">
+            <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+            <script>
+                    // Make a request for a user with a given ID
+                    axios.get('/visitas')
+                    .then(function (response) {
+                        document.querySelector('#total-de-visitas').innerHTML  =response.data
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+                    .finally(function () {
+                        // always executed
+                    });
+            </script>
+            <h4>Total de visitas</h4>
+            <ul>
+                <li id="total-de-visitas">Total de visitas: </li>
+            </ul>
             <h4>Redes Sociais</h4>
             <ul>
                 <li><a href="https://api.whatsapp.com/send?phone=555596650450">Whatsapp</a></li>
