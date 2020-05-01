@@ -11,3 +11,10 @@
 @endif
 
 
+@if (session('errors'))
+    <div class="alert alert-danger" role="alert">
+        @foreach($errors as $error)
+            {{$error}}<br>
+        @endforeach
+    </div>
+@endif

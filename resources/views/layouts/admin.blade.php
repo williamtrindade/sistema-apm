@@ -18,7 +18,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
         <div class="container">
-            <a class="navbar-brand" href="{{ route('home.index') }}">
+            <a class="navbar-brand" href="{{ route('admin.index') }}">
                 <img src="{{ asset('img/logoe.png') }}" width="25" height="30" alt="Logotipo APM">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,6 +41,9 @@
                     </li>
                     <li class="nav-item">
                         <a  class="nav-link active" href="{{ route('albums.index') }}" >Galeria de Imagens</a>
+                    </li>
+                    <li class="nav-item">
+                        <a  class="nav-link active" href="{{ route('configuracoes.index') }}" >Configurações</a>
                     </li>
                 </ul>
                 @guest

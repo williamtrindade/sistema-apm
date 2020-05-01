@@ -5,7 +5,7 @@
         <div class="columns">
             <div class="column is-12-desktop is-12-mobile">   
                 <h1 class="title is-4 ">Prestação de Contas</h1>
-                <a href="{{ route('contas.create') }}" class="btn btn-primary" style="margin-bottom:2%;">Cadastrar Prestação de Contas</a>
+                <a href="{{ route('contas.create') }}" class="btn btn-primary" style="margin-bottom:2%;"><i class="fas fa-plus"></i> Cadastrar Prestação de Contas</a>
                 <div class="box">
                     @include('includes.notification')
                     @if($contas->count() > 0)
