@@ -25,13 +25,13 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet"> 
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('css/app.css') }}">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar navbar-dark" style="background-color:#AE1C28">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home.index') }}">
-                <img src="{{ asset('img/logoe.png') }}" width="25" height="30" alt="Logotipo APM">
+                <img src="{{ secure_asset('img/logoe.png') }}" width="25" height="30" alt="Logotipo APM">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -75,5 +75,5 @@
     </main>
 </body>
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}" defer></script>
+<script src="{{ secure_asset('js/app.js') }}" defer></script>
 </html>

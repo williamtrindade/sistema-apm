@@ -102,7 +102,7 @@
                     <h5><i class="fas fa-file-pdf"></i> Estatuto</h5>
                     <div class="card-body">
                         <p>Baixe e Leia nosso estatuto</p>
-                        <a href="{{ asset('pdf/estatuto.pdf') }}" download class="btn btn-primary">Download</a>
+                        <a href="{{ secure_asset('pdf/estatuto.pdf') }}" download class="btn btn-primary">Download</a>
                     </div>
                 </div>
             </div>

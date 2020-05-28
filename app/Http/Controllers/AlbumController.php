@@ -119,7 +119,8 @@ class AlbumController extends Controller
         $imagem->delete();
     }
 
-    public function destroyAlbum($id) {
+    public function destroyAlbum($id) 
+    {
         $album = Album::find($id);
         if($album->imagens()->count() > 0) {
             foreach ($album->imagens as $image) {
