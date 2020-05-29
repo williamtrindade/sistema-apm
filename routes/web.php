@@ -52,4 +52,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('sub-albums/{id}', 'SubAlbumController@show')->name('sub-albums.show');
     Route::post('albums/sub/create', 'SubAlbumController@store')->name('sub-albums.store');
 
+    // configurações
+    Route::get('configuracoes', 'ConfiguracaoController@index')->name('configuracoes.index');
+    Route::put('configuracoes/login', 'ConfiguracaoController@updateLoginData')->name('configuracoes.login.update');
 });

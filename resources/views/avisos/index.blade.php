@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 
                 <h1>Avisos</h1>
-                <a href="{{ route('avisos.create') }}" class="btn btn-primary" style="margin-bottom:2%;">Cadastrar Aviso</a>
+                <a href="{{ route('avisos.create') }}" class="btn btn-primary" style="margin-bottom:2%;"><i class="fas fa-plus"></i> Cadastrar Aviso</a>
              
                 <div>
                     @if(count($avisos) > 0)

@@ -102,7 +102,7 @@
                     <h5><i class="fas fa-file-pdf"></i> Estatuto</h5>
                     <div class="card-body">
                         <p>Baixe e Leia nosso estatuto</p>
-                        <a href="{{ asset('pdf/estatuto.pdf') }}" download class="btn btn-primary">Download</a>
+                        <a href="{{ secure_asset('pdf/estatuto.pdf') }}" download class="btn btn-primary">Download</a>
                     </div>
                 </div>
             </div>
@@ -181,7 +181,7 @@
                         </div>
 
                         <div class="col-md-6 mt-2">
-                            <h5>Entre em contato conosto</h5>
+                            <h5>Entre em contato conosco</h5>
                             <h5 class="mt-3"><b>Secretaria</b> </h5>
                             <p>E-mail: <a href="mailto:apmcmsm@gmail.com">apmcmsm@gmail.com</a> </p> 
                             <p>Fones: (055) 3213-2104 / (055) 3218-4366</p>
