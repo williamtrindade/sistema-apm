@@ -141,3 +141,35 @@ git pull
 git pull
 git pull
 ls
+ls
+git pull
+git add *
+git pull
+git merge
+git add .
+git commit -m "server update"
+git push
+git pull
+git pull
+git pull
+git commit -m "update"
+git push
+git pull
+git add .
+git add *
+git commit -m "fianl"
+git push
+git pull
+git pull
+git pull
+ls
+code
+git pull
+ls
+git pull
+composer install
+npm install
+ls
+ls
+git pull
+git pull
