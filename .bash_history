@@ -173,3 +173,41 @@ ls
 ls
 git pull
 git pull
+git status
+git pull
+git status
+git add .
+git commit -m "atualizacoes do server"
+git push
+git pull
+git status
+git checkout -- .
+git status
+git push
+npm run production
+git status
+ll
+lss
+ls
+apt
+apt install npm
+sudo apt install npm
+su
+su
+composer
+su root
+su
+npm i
+ll
+ls
+ls
+la
+ls -la
+ls
+npm i
+sudo apt install npm
+su
+sudo passwd root
+su passwd root
+show users
+su root
