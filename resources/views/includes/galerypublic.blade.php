@@ -2,8 +2,8 @@
     <div class="row">
         @foreach ($album->imagens as $imagem)
             <div class="col-lg-3 col-md-4 col-xs-6  img-fluid">
-                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="" data-image="{{ secure_asset('storage/imagens/'.$imagem->imagem) }}" data-target="#image-gallery">
-                    <img class="img-thumbnail" src="{{ secure_asset('storage/imagens/'.$imagem->imagem) }}" alt="Another alt text">
+                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="" data-image="{{ asset('storage/imagens/'.$imagem->imagem) }}" data-target="#image-gallery">
+                    <img class="img-thumbnail" src="{{ asset('storage/imagens/'.$imagem->imagem) }}" alt="Another alt text">
                 </a>
             </div>
         @endforeach
