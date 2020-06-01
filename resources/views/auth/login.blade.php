@@ -15,7 +15,11 @@
         <div class="col-md-12 d-flex justify-content-center" >
             <div class="shadow login m-5 p-5">
                 <h2 class="text-center" >Login APM</h2>
-
+                @if($errors->any())
+                    @foreach($errors->all() as $error)
+                        <span style="color: red">{{ $error }}</span><br>
+                    @endforeach
+                @endif
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="form-group">
