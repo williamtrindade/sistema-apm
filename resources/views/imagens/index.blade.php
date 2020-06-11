@@ -20,7 +20,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Galeria de Imagens</h1>
+            <h1>Galeria</h1>
             <a href="{{ route('sub-albums.show', $album->owner_album_id) }}" class="btn btn-secondary" style="margin-bottom:2%;"><i class="fas fa-arrow-left"></i> Voltar</a><br>
             @include('includes.notification')
 
@@ -32,7 +32,7 @@
                 </ol>
             </nav>
             <div class="card shadow p-3">
-                <h3>Inserir Imagens</h3>
+                <h3>Inserir Imagens / Vídeos</h3>
                 <form action="{{ route('imagens.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('POST')
@@ -43,8 +43,8 @@
                             <span class="input-group-text" id="imagens">Imagens</span>
                         </div>
                         <div class="custom-file">
-                            <input required class="custom-file-input" type="file" multiple name="imagem[]" id="imagens" aria-describedby="imagens">
-                            <label class="custom-file-label" for="imagens">Selecione Imagens</label>
+                            <input max="2048" required class="custom-file-input" type="file" multiple name="imagem[]" id="imagens" aria-describedby="imagens">
+                            <label class="custom-file-label" for="imagens">Selecione Imagens / vídeos do seu device</label>
                         </div>
                     </div>
                     @error('imagem')
@@ -65,8 +65,8 @@
     <div class="row">    
         <div class="col-md-12">
             <div class="card shadow p-4">
-                <h3>Imagens</h3>
-                @if(count($imagens) > 0)
+                <h3>Imagens e Vídeos</h3>
+                @if(count($midias) > 0)
                     @include('includes.galery')
                 @else
                     <div class="alert alert-primary" role="alert">

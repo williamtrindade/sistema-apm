@@ -2,29 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\UploadVimeoVideo;
+use App\Video;
+use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Imagem;
-use App\ImagemCategoria;
-use Storage;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 use Carbon\Carbon;
 use App\Album;
+use Symfony\Component\HttpFoundation\File\Exception\ExtensionFileException;
+use Vimeo\Exceptions\VimeoRequestException;
+use Vimeo\Exceptions\VimeoUploadException;
+use Vimeo\Laravel\Facades\Vimeo;
+use Vimeo\Laravel\VimeoManager;
 
 class ImagemController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-      
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function create()
     {
@@ -32,82 +37,95 @@ class ImagemController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function store(Request $request)
     {
-        $request->validate([
+        Validator::make($request->all(), [
             'album_id' => 'required',
-            'imagem' => 'required',
-            'imagem.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);        
-       
-        $imagensUploades = $request->imagem;
-        foreach($imagensUploades as $image) {
-            $fileExtension = $image->extension();
-            $fileName = $image->getClientOriginalName().Carbon::now().$fileExtension;
-            if($image->storeAs('imagens', $fileName)) {
-                Imagem::Create([
-                    'imagem' => $fileName, 
-                    'album_id' => $request->album_id
-                ]);
-            } else {
-                return redirect()->back()->with('status-danger', 'Ocorreu um erro enquanto salvava as imagems :[!');
-            }
+        ])->validate();
+        try {
+            DB::transaction(function () use ($request) {
+                $medias = $request->imagem;
+
+                foreach($medias as $media) {
+                    $fileExtension = $media->extension();
+
+                    if (in_array($fileExtension, Imagem::imgExt)) {
+                        $this->uploadImage($request->all(), $media, $fileExtension);
+                    } elseif (in_array($fileExtension, Imagem::videoExt)) {
+                        $this->uploadVideo($request->all(), $media, $fileExtension);
+                    } else {
+                        throw new Exception();
+                    }
+                }
+            });
+        } catch (Exception $exception) {
+            dd($exception->getMessage());
+            return redirect()->back()->with('status-danger', 'Erro! Envie apenas imagens e vídeos!');
         }
-        return redirect()->back()->with('status-success', 'Imagens enviadas com sucesso:)!');     
+        return redirect()->back()->with('status-success', 'Imagens enviadas com sucesso:)!');
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return Application|Factory|View
      */
     public function show($id)
     {
         $album = Album::find($id);
+        /** @var Collection $imagens */
         $imagens = $album->imagens;
-        return view('imagens.index', compact('imagens', 'album'));
+        /** @var Collection $videos */
+        $videos = $album->videos;
+        $midias = $imagens->merge($videos);
+        return view('imagens.index', compact('midias', 'album'));
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return RedirectResponse
+     * @throws Exception
      */
     public function destroy($id)
     {
+        /** @var Imagem $imagem */
         $imagem = Imagem::find($id);
         Storage::disk('public')->delete('imagens/'.$imagem->imagem);
         $imagem->delete();
         return redirect()->back()->with('status-success', 'Imagem deletada!');
+    }
+
+    /**
+     * @param array $data
+     * @param $image
+     * @param $extension
+     * @return void|RedirectResponse
+     */
+    private function uploadImage(array $data, $image, $extension)
+    {
+        $fileName = $image->getClientOriginalName() . Carbon::now() . '.' . $extension;
+        if ($image->storeAs('imagens', $fileName)) {
+            Imagem::create([
+                'imagem'   => $fileName,
+                'album_id' => $data['album_id']
+            ]);
+        }
+    }
+
+    /**
+     * @param array $data
+     * @param UploadedFile $video
+     * @param $extension
+     */
+    private function uploadVideo(array $data, UploadedFile $video, $extension)
+    {
+        $fileName = $video->getClientOriginalName() . Carbon::now() . '.' . $extension;
+        UploadVimeoVideo::dispatch($video, $extension);
+        Video::create([
+            'video'   => $fileName,
+            'album_id' => $data['album_id']
+        ]);
     }
 }

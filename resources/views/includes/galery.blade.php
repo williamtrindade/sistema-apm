@@ -1,16 +1,16 @@
 <div class="row">
 		<div class="row">
-            @foreach ($imagens as $imagem)
-                <div class="col-lg-3 col-md-4 col-xs-6  img-fluid">
-                    <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="" data-image="{{ asset('storage/imagens/'.$imagem->imagem) }}" data-target="#image-gallery">
-                        <img class="img-thumbnail " src="{{ asset('storage/imagens/'.$imagem->imagem) }}" alt="Another alt text">
-                    </a>
-                    <form style="top:0;position:absolute" method="POST" action="{{ route('imagens.destroy', $imagem->id) }}">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-sm btn-danger" style="top:0" type="submit"><i  class="fas fa-trash"></i> Apagar</button>
-                    </form>  
-                </div>
+            @foreach ($midias as $midia)
+{{--                <div class="col-lg-3 col-md-4 col-xs-6  img-fluid">--}}
+{{--                    <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="" data-image="{{ asset('storage/imagens/'.$imagem->imagem) }}" data-target="#image-gallery">--}}
+{{--                        <img class="img-thumbnail " src="{{ asset('storage/imagens/'.$imagem->imagem) }}" alt="Another alt text">--}}
+{{--                    </a>--}}
+{{--                    <form style="top:0;position:absolute" method="POST" action="{{ route('imagens.destroy', $imagem->id) }}">--}}
+{{--                        @csrf--}}
+{{--                        @method('DELETE')--}}
+{{--                        <button class="btn btn-sm btn-danger" style="top:0" type="submit"><i  class="fas fa-trash"></i> Apagar</button>--}}
+{{--                    </form>  --}}
+{{--                </div>--}}
             @endforeach
         </div>
 

@@ -14,6 +14,11 @@ class Album extends Model
         return $this->hasMany('App\Imagem');
     }
 
+    public function videos()
+    {
+        return $this->hasMany('App\Video');
+    }
+
     // Pode ser NULL
     public function ownerAlbum()
     {

@@ -52,7 +52,7 @@
                         <a  class="nav-link active" href=" {{ route('home.contas.index') }}">Prestação de Contas</a>
                     </li>
                     <li class="nav-item">
-                        <a  class="nav-link active" href="{{ route('home.albuns.index') }}" >Galeria de Imagens</a>
+                        <a  class="nav-link active" href="{{ route('home.albuns.index') }}" >Galeria</a>
                     </li>
                 </ul>
                 @guest

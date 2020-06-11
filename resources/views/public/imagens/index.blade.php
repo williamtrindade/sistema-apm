@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container">
-        <h1>Galeria de Imagens</h1>
+        <h1>Galeria</h1>
         <h4>Álbuns</h4>
         @isset($albums)
             @foreach ($albums as $album)

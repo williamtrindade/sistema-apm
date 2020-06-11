@@ -3,17 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Imagem extends Model
+class Video extends Model
 {
-    protected $table = 'imagems';
-    protected $fillable = ['imagem', 'album_id'];
+    protected $table = 'videos';
+    protected $fillable = ['video', 'album_id'];
 
     const imgExt = ['jpeg','png','jpg','gif','svg',];
     const videoExt = ['mpeg','ogg','mp4','webm','3gp','mov','flv','avi','wmv','ts',];
 
     /**
-     * @return mixed
+     * @return BelongsTo
      */
     public function album()
     {

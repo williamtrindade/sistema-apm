@@ -15,7 +15,7 @@
     }
 </style>
 <div class="container">
-    <h1>Galeria de Imagens</h1>
+    <h1>Galeria</h1>
 
     <a href="{{ route('albums.index') }}" class="btn btn-secondary" style="margin-bottom:2%;"><i class="fas fa-arrow-left"></i> Voltar</a><br>
     <nav aria-label="breadcrumb">
@@ -39,7 +39,7 @@
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">Nome do Álbum</th>
-                        <th>Quantidade de Imagens</th>
+                        <th>Quantidade de Imagens / Vídeos</th>
                         <th  style="text-align: center;"></th>
                     </tr>
                 </thead>
@@ -47,10 +47,10 @@
                     @foreach ($album->albums as $album)
                     <tr>
                         <th>{{ $album->nome }}</th>
-                        <th>{{ $album->imagens->count() }}</th>
+                        <th>{{ $album->imagens->count() + $album->videos->count()}}</th>
                         <th style="text-align: right;">
                             <a href="{{ route('imagens.show', $album->id) }}" class="btn btn-success">
-                                <i class="fas fa-eye"></i> Visualizar Imagens
+                                <i class="fas fa-eye"></i> Visualizar
                             </a>  
                     
                             <a href="{{ route('albums.edit', $album->id) }}" class="btn btn-primary">

@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">  
-            <h1>Galeria de Imagens</h1>
+            <h1>Galeria</h1>
             <a href="{{ route('albums.create') }}" class="btn btn-primary" style="margin-bottom:2%;"><i class="fas fa-plus"></i> Criar Álbum</a>
 
             @include('includes.notification')

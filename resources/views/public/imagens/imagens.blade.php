@@ -17,7 +17,7 @@
         }
     </style>
     <div class="container">
-        <h1>Galeria de Imagens</h1>
+        <h1>Galeria</h1>
         @isset($album)
             <a href="{{ route('home.albuns.show', $album->owner_album_id) }}" class="btn btn-secondary" ><i class="fas fa-arrow-left"></i> Voltar</a>
             <h4>Imagens do Álbum {{ $album->nome }}</h4>

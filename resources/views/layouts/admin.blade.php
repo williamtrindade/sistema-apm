@@ -40,7 +40,7 @@
                         <a  class="nav-link active" href=" {{ route('contas.index') }}">Prestação de Contas</a>
                     </li>
                     <li class="nav-item">
-                        <a  class="nav-link active" href="{{ route('albums.index') }}" >Galeria de Imagens</a>
+                        <a  class="nav-link active" href="{{ route('albums.index') }}" >Galeria</a>
                     </li>
                     <li class="nav-item">
                         <a  class="nav-link active" href="{{ route('configuracoes.index') }}" >Configurações</a>
