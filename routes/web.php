@@ -1,4 +1,8 @@
 <?php
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 Auth::routes(['register' => false]);
 
 // Visitas
@@ -45,6 +49,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::resource('avisos', 'AvisoController');
     Route::resource('contas', 'ContaController');
     Route::resource('imagens', 'ImagemController');
+    Route::resource('videos', 'VideoController');
     Route::resource('albums', 'AlbumController');
 
     // sub albums

@@ -33,7 +33,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="senha">Senha (opcional)</label>
+                                    <label for="senha">Nova Senha (preenchimento opcional)</label>
                                     <input minlength="6" name="password" type="password" class="form-control" id="senha" placeholder="Nova senha" >
                                 </div>
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Salvar alterações</button>

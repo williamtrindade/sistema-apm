@@ -2,51 +2,49 @@
 
 namespace App\Jobs;
 
-use Carbon\Carbon;
-use Illuminate\Bus\Queueable;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Vimeo\Exceptions\VimeoRequestException;
-use Vimeo\Exceptions\VimeoUploadException;
+use App\Video;
+use Illuminate\Support\Facades\Storage;
+use Thread;
 use Vimeo\Laravel\VimeoManager;
-use Vimeo\Vimeo;
 
 /**
  * Class UploadVimeoVideo
  * @package App\Jobs
  */
-class UploadVimeoVideo implements ShouldQueue
+class UploadVimeoVideo
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    /** @var $video */
+    private $video;
+
+    /** @var int */
+    private $album_id;
+
+    /** @var string */
+    private $fileName;
 
     /**
      * Create a new job instance.
      *
-     * @param UploadedFile $video
-     * @param $extension
-     * @throws VimeoRequestException
-     * @throws VimeoUploadException
+     * @param $video
+     * @param $album_id
+     * @param $fileName
      */
-    public function __construct(UploadedFile $video, $extension)
+    public function __construct( $video, $album_id, $fileName)
     {
-        $fileName = $video->getClientOriginalName() . Carbon::now() . '.' . $extension;
-
-        /** @var Vimeo $vimeo */
-        $vimeo = app(VimeoManager::class);
-
-        $vimeo->upload($video->getRealPath());
+        $this->video = $video;
+        $this->album_id = $album_id;
+        $this->fileName = $fileName;
     }
 
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
-    public function handle()
+
+    public function start()
     {
-        //
+        $vimeo = app(VimeoManager::class);
+
+        Video::Create([
+            'video'   => $vimeo->upload($this->video),
+            'album_id' => $this->album_id
+        ]);
+        Storage::disk('public')->delete('videos/'.$this->fileName);
     }
 }

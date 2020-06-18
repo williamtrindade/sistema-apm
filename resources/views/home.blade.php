@@ -166,11 +166,11 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="nome">Nome</label>
-                                    <input required name="nome" type="text" class="form-control" id="nome" placeholder="digite seu nome">
+                                    <input required name="nome" type="text" class="form-control" id="nome" placeholder="Digite seu nome">
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input required name="email" type="email" class="form-control" id="email" placeholder="name@dominio.com">
+                                    <input required name="email" type="email" class="form-control" id="email" placeholder="nome@dominio.com">
                                 </div>  
                                 <div class="form-group">
                                     <label for="mensagem">Sua Mensagem: </label>

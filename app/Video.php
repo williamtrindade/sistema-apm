@@ -5,6 +5,12 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * Class Video
+ * @package App
+ *
+ * @property string $video
+ */
 class Video extends Model
 {
     protected $table = 'videos';

@@ -1,39 +1,90 @@
+
 <div class="row">
-		<div class="row">
-            @foreach ($midias as $midia)
-{{--                <div class="col-lg-3 col-md-4 col-xs-6  img-fluid">--}}
-{{--                    <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="" data-image="{{ asset('storage/imagens/'.$imagem->imagem) }}" data-target="#image-gallery">--}}
-{{--                        <img class="img-thumbnail " src="{{ asset('storage/imagens/'.$imagem->imagem) }}" alt="Another alt text">--}}
-{{--                    </a>--}}
-{{--                    <form style="top:0;position:absolute" method="POST" action="{{ route('imagens.destroy', $imagem->id) }}">--}}
-{{--                        @csrf--}}
-{{--                        @method('DELETE')--}}
-{{--                        <button class="btn btn-sm btn-danger" style="top:0" type="submit"><i  class="fas fa-trash"></i> Apagar</button>--}}
-{{--                    </form>  --}}
-{{--                </div>--}}
+    <nav style="width: 100%">
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Imagens</a>
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Vídeos</a>
+
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent" style="width: 100%;">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" style="width: 100%">
+            @foreach ($images as $image)
+                <div class="col-lg-3 col-md-4 col-xs-6 m-1" style="float: left">
+                    <a
+                            class="thumbnail"
+                            href="#"
+                            data-image-id=""
+                            data-toggle="modal"
+                            data-title=""
+                            data-image="{{ asset('storage/imagens/' . $image->imagem) }}"
+                            data-target="#image-gallery"
+                    >
+                        <img
+                                class="img-thumbnail"
+                                src="{{ asset('storage/imagens/'.$image->imagem) }}"
+                                alt="Another alt text"
+                        >
+                    </a>
+                    <form
+                            style="top:0;position:absolute"
+                            method="POST"
+                            action="{{ route('imagens.destroy', $image->id) }}"
+                    >
+                        @csrf
+                        @method('DELETE')
+                        <button
+                                class="btn btn-sm btn-danger"
+                                style="top:0"
+                                type="submit"
+                        >
+                            <i  class="fas fa-trash"></i> Apagar
+                        </button>
+                    </form>
+                </div>
             @endforeach
         </div>
 
-
-        <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="image-gallery-title"></h4>
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            @foreach ($videos as $video)
+                <div class="col-lg-3 col-md-4 col-xs-6  img-fluid m-4" style="float: left">
+                    <a
+                            class="thumbnail"
+                            href="#"
+                            data-image-id=""
+                            data-toggle="modal"
+                            data-title=""
+                            data-image="{{ asset('storage/imagens/' . $video->video) }}"
+                            data-target="#image-gallery"
+                    >
+                        <iframe
+                                src="https://player.vimeo.com/video/{{explode('/', $video->video)[2]}}"
+                                width="{video_width}" height="{video_height}"
+                                frameborder="0"
+                                title="{video_title}"
+                                webkitallowfullscreen
+                                mozallowfullscreen
+                                allowfullscreen
+                        >
+                        </iframe>
+                    </a>
+                    <form
+                            style="top:0;position:absolute"
+                            method="POST"
+                            action="{{ route('videos.destroy', $video->id) }}"
+                    >
+                        @csrf
+                        @method('DELETE')
+                        <button
+                                class="btn btn-sm btn-danger"
+                                style="top:0"
+                                type="submit"
+                        >
+                            <i  class="fas fa-trash"></i> Apagar
                         </button>
-                    </div>
-                    <div class="modal-body">
-                        <img id="image-gallery-image" class="img-responsive col-md-12" src="">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary float-left" id="show-previous-image"><i class="fa fa-arrow-left"></i>
-                        </button>
-
-                        <button type="button" id="show-next-image" class="btn btn-secondary float-right"><i class="fa fa-arrow-right"></i>
-                        </button>
-                    </div>
+                    </form>
                 </div>
-            </div>
+            @endforeach
         </div>
-	</div>
+    </div>
+</div>

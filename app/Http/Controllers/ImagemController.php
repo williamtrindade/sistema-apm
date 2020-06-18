@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\UploadVimeoVideo;
-use App\Video;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -12,20 +11,18 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Imagem;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use Carbon\Carbon;
 use App\Album;
-use Symfony\Component\HttpFoundation\File\Exception\ExtensionFileException;
-use Vimeo\Exceptions\VimeoRequestException;
-use Vimeo\Exceptions\VimeoUploadException;
-use Vimeo\Laravel\Facades\Vimeo;
-use Vimeo\Laravel\VimeoManager;
+use React\EventLoop\Factory as ReactFactory;
 
+/**
+ * Class ImagemController
+ * @package App\Http\Controllers
+ */
 class ImagemController extends Controller
 {
     /**
@@ -45,8 +42,11 @@ class ImagemController extends Controller
         Validator::make($request->all(), [
             'album_id' => 'required',
         ])->validate();
+
+        $video_sent = false;
+
         try {
-            DB::transaction(function () use ($request) {
+            DB::transaction(function () use ($request, &$video_sent) {
                 $medias = $request->imagem;
 
                 foreach($medias as $media) {
@@ -55,17 +55,20 @@ class ImagemController extends Controller
                     if (in_array($fileExtension, Imagem::imgExt)) {
                         $this->uploadImage($request->all(), $media, $fileExtension);
                     } elseif (in_array($fileExtension, Imagem::videoExt)) {
-                        $this->uploadVideo($request->all(), $media, $fileExtension);
+                        $this->uploadVideo($request->all(), $media);
+                        $video_sent = true;
                     } else {
                         throw new Exception();
                     }
                 }
             });
         } catch (Exception $exception) {
-            dd($exception->getMessage());
             return redirect()->back()->with('status-danger', 'Erro! Envie apenas imagens e vídeos!');
         }
-        return redirect()->back()->with('status-success', 'Imagens enviadas com sucesso:)!');
+        if ($video_sent == true) {
+            return redirect()->back()->with('status-success', 'Agarde! Suas mídias já vão aparecer, seus vídeos foram para o vimeo!');
+        }
+        return redirect()->back()->with('status-success', 'Imagens enviadas com sucesso!');
     }
 
     /**
@@ -74,13 +77,16 @@ class ImagemController extends Controller
      */
     public function show($id)
     {
+        /** @var Album $album */
         $album = Album::find($id);
+
         /** @var Collection $imagens */
-        $imagens = $album->imagens;
+        $images = $album->imagens;
+
         /** @var Collection $videos */
         $videos = $album->videos;
-        $midias = $imagens->merge($videos);
-        return view('imagens.index', compact('midias', 'album'));
+
+        return view('imagens.index', compact('images', 'videos', 'album'));
     }
 
     /**
@@ -117,15 +123,23 @@ class ImagemController extends Controller
     /**
      * @param array $data
      * @param UploadedFile $video
-     * @param $extension
      */
-    private function uploadVideo(array $data, UploadedFile $video, $extension)
+    private function uploadVideo(array $data, UploadedFile $video)
     {
-        $fileName = $video->getClientOriginalName() . Carbon::now() . '.' . $extension;
-        UploadVimeoVideo::dispatch($video, $extension);
-        Video::create([
-            'video'   => $fileName,
-            'album_id' => $data['album_id']
-        ]);
+        // $fileExtension = $video->extension();
+        $fileName = $video->getClientOriginalName() . Carbon::now();
+
+        $video->storeAs('videos', $fileName);
+
+        $loop = ReactFactory::create();
+
+
+            $path = storage_path().'/app/public/videos/' . $fileName;
+            $upload = new UploadVimeoVideo($path, $data['album_id'], $fileName);
+            $upload->start();
+            $loop->stop();
+
+
+        $loop->run();
     }
 }

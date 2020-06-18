@@ -5,22 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Aviso;
 use App\Conta;
-use App\Imagem;
 use App\Album;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContatoMail;
 use DateTime;
 use Carbon\Carbon;
-use Analytics;
-use Spatie\Analytics\Period;
 
 class HomeController extends Controller
 {
     public function index()
     {
         $avisos = Aviso::orderBy('created_at', 'DESC')->take(3)->get();
-        $visitas = Analytics::fetchMostVisitedPages(Period::days(5000))['0']['pageViews'];
-        return view('home', compact('avisos', 'visitas'));    
+        //$visitas = Analytics::fetchMostVisitedPages(Period::days(5000))['0']['pageViews'];
+        return view('home', compact('avisos'));
     }
 
     public function showAllAvisos()

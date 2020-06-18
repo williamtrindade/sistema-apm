@@ -7,10 +7,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card shadow p-3 mb-3">
+                    <h2 style="font-size: 100%">Páginas mais visitadas:</h2>
                     <canvas id="myChart" width="400" height="100"></canvas>
                     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
                     <script>
-                        var ctx = document.getElementById('myChart');
+                        const ctx = document.getElementById('myChart');
                         var myChart = new Chart(ctx, {
                             type: 'bar',
                             data: {
@@ -83,10 +84,10 @@
             <div class="col-md-4">
                 <div class="card shadow">
                     <div class="card-header">
-                        Imagens
+                        Imagens e Vídeos
                     </div>
                     <div class="card-body">
-                        <h1>{{ $imagens }}</h1>
+                        <h1>{{ $imagens + $videos}}</h1>
                         <p class="card-text">Cadastrada(s).</p>
                         <a href="{{ route('albums.index') }}" class="btn btn-primary">Acesse</a>
                     </div>

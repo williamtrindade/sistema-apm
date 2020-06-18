@@ -33,7 +33,8 @@
             </nav>
             <div class="card shadow p-3">
                 <h3>Inserir Imagens / Vídeos</h3>
-                <form action="{{ route('imagens.store') }}" method="POST" enctype="multipart/form-data">
+
+                <form enctype="multipart/form-data" id="formUpload" method="POST" action="{{ route('imagens.store') }}">
                     @csrf
                     @method('POST')
 
@@ -54,26 +55,27 @@
                     @enderror
 
                     <!--ALBUM ID-->
-                    <input type="hidden" name="album_id" value="{{ $album->id }}">
+                    <input type="hidden" name="album_id" value="{{ $album->id }}" id="album_id">
                     
-                    <button type="submit" class="btn btn-success">Inserir Imagens</button>
+                    <button type="submit" class="btn btn-success">Inserir</button>
                 </form>
+
             </div>
         </div>
     </div>
     <hr>
     <div class="row">    
         <div class="col-md-12">
-            <div class="card shadow p-4">
-                <h3>Imagens e Vídeos</h3>
-                @if(count($midias) > 0)
+
+
+                @if((count($images) + count($videos)) > 0)
                     @include('includes.galery')
                 @else
                     <div class="alert alert-primary" role="alert">
                         Sem Imagens na Galeria
                     </div>
                 @endif
-            </div>
+
         </div>
     </div>
 </div>

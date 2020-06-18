@@ -2,17 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Album;
 use App\Imagem;
-use Storage;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
+
+/**
+ * Class AlbumController
+ * @package App\Http\Controllers
+ */
 class AlbumController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function index()
     {
@@ -21,9 +30,7 @@ class AlbumController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function create()
     {
@@ -31,10 +38,9 @@ class AlbumController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return RedirectResponse
+     * @throws ValidationException
      */
     public function store(Request $request)
     {
@@ -48,22 +54,16 @@ class AlbumController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
      */
     public function show($id)
-    {  
-    
+    {
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */ 
+     * @param $id
+     * @return Application|Factory|View
+     */
     public function edit($id)
     {
         $album = Album::find($id);
@@ -71,11 +71,9 @@ class AlbumController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param $id
+     * @return RedirectResponse
      */
     public function update(Request $request, $id)
     {
@@ -89,10 +87,8 @@ class AlbumController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return RedirectResponse
      */
     public function destroy($id)
     {
@@ -112,13 +108,20 @@ class AlbumController extends Controller
 
     }
 
+    /**
+     * @param $id
+     */
     public function destroyImage($id)
     {
         $imagem = Imagem::find($id);
-        Storage::disk('public')->delete('imagens/'.$imagem->imagem);
+        Storage::disk('public')->delete('imagens/' . $imagem->imagem);
         $imagem->delete();
     }
 
+    /**
+     * @param $id
+     * @throws Exception
+     */
     public function destroyAlbum($id) 
     {
         $album = Album::find($id);
@@ -127,7 +130,23 @@ class AlbumController extends Controller
                 $this->destroyImage($image->id);
             }
         }
+        if($album->videos()->count() > 0) {
+            foreach ($album->videos as $video) {
+                $this->destroyVideo($video->id);
+            }
+        }
         $album->delete();
 
+    }
+
+    /**
+     * @param $id
+     * @throws Exception
+     */
+    private function destroyVideo($id)
+    {
+        /** @var VideoController $video_controller */
+        $video_controller = app(VideoController::class);
+        $video_controller->destroy($id);
     }
 }
