@@ -7,7 +7,7 @@
 <footer class="footer-bs">
     <div class="row">
         <div class="col-md-3 footer-brand animated fadeInLeft">
-            <h2><img src="{{ asset('img/logoe.png') }}" alt="" width="100px"></h2>    
+            <h2><img src="{{ secure_asset('img/logoe.png') }}" alt="" width="100px"></h2>
         </div>
         <div class="col-md-4 footer-nav animated fadeInUp">
             <h4>Menu —</h4>
