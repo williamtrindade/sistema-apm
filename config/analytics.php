@@ -12,7 +12,7 @@ return [
      * instead of a file path.
      */
     'service_account_credentials_json' =>
-    env('APP_ENV') == 'local'?
+    env('APP_ENV') == 'local' ?
         app_path('Services/analytics/service-account-credentials-local.json'):
         app_path('Services/analytics/service-account-credentials-production.json'),
 
