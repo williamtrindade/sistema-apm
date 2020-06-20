@@ -24,15 +24,12 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet"> 
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-<<<<<<< HEAD
-    <link rel="stylesheet" href="{{ secure_asset('css/app.css') }}">
-=======
+
     @if(env('APP_ENV') == 'production')
         <link rel="stylesheet" href="{{ secure_asset('css/app.css') }}">
     @else
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     @endif
->>>>>>> c685a45516cb0fa76164c17b7204d39f08226fc3
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar navbar-dark" style="background-color:#AE1C28">
