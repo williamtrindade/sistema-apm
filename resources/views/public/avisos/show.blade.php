@@ -10,8 +10,8 @@
             @if($aviso->conteudo)
                 {!! $aviso->conteudo !!}
             @endif
-            <a href="{{asset('storage/avisos/'.$aviso->pdf)}}">Ver anexo</a>
-            <iframe src="{{asset('storage/avisos/'.$aviso->pdf)}}" frameborder="0" width="100%" height="900px"></iframe>
+            <a href="{{secure_asset('storage/avisos/'.$aviso->pdf)}}">Ver anexo</a>
+            <iframe src="{{secure_asset('storage/avisos/'.$aviso->pdf)}}" frameborder="0" width="100%" height="900px"></iframe>
             
         @else
             {!! $aviso->conteudo !!}
