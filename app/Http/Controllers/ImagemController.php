@@ -63,6 +63,7 @@ class ImagemController extends Controller
                 }
             });
         } catch (Exception $exception) {
+            dd($exception->getMessage());
             return redirect()->back()->with('status-danger', 'Erro! Envie apenas imagens e vídeos!');
         }
         if ($video_sent == true) {
