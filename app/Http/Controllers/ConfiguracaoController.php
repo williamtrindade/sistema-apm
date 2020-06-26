@@ -51,8 +51,8 @@ class ConfiguracaoController extends Controller
             return redirect()->back();
         }
         $dataToValidate = [
-            'name'     => ['required', 'string', 'max:255'],
-            'email'    => ['required', 'string', 'email', 'max:255', 'unique:users,' . Auth::user()->id],
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255'
         ];
         if ($this->request->password != null) {
             $dataToValidate['password'] = 'required|string|min:6';
